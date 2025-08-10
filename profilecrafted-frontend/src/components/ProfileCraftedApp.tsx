@@ -1,0 +1,220 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { AppState, ScoreWithTips } from '@/types';
+import { api, APIError } from '@/lib/api';
+import FileUpload from '@/components/FileUpload';
+import ScoreCard from '@/components/ScoreCard';
+import EssayEditor from '@/components/EssayEditor';
+import ExportPage from '@/components/ExportPage';
+
+export default function ProfileCraftedApp() {
+  const [appState, setAppState] = useState<AppState>({
+    currentStep: 'upload',
+    isLoading: false,
+    scores: null,
+    essay: '',
+    sessionId: null,
+    error: null,
+  });
+
+  const handleFileSelect = async (file: File) => {
+    setAppState(prev => ({ ...prev, isLoading: true, error: null }));
+
+    try {
+      const response = await api.uploadResume(file);
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        scores: response.analysis,
+        sessionId: response.sessionId,
+        currentStep: 'analysis',
+      }));
+    } catch (error) {
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof APIError ? error.message : 'Upload failed',
+      }));
+    }
+  };
+
+  const handleGenerateEssay = async () => {
+    if (!appState.scores || !appState.sessionId) return;
+
+    setAppState(prev => ({ ...prev, isLoading: true, error: null }));
+
+    try {
+      const response = await api.generateEssay(appState.scores, appState.sessionId);
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        essay: response.essay,
+        currentStep: 'essay',
+      }));
+    } catch (error) {
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof APIError ? error.message : 'Essay generation failed',
+      }));
+    }
+  };
+
+  const handleRegenerateEssay = async () => {
+    if (!appState.scores || !appState.sessionId) return;
+
+    setAppState(prev => ({ ...prev, isLoading: true, error: null }));
+
+    try {
+      const response = await api.regenerateEssay(appState.scores, appState.sessionId);
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        essay: response.essay,
+      }));
+    } catch (error) {
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof APIError ? error.message : 'Essay regeneration failed',
+      }));
+    }
+  };
+
+  const handleSendEmail = async (email: string) => {
+    if (!appState.essay) return;
+
+    setAppState(prev => ({ ...prev, isLoading: true, error: null }));
+
+    try {
+      await api.sendEmail(email, appState.essay);
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        currentStep: 'export',
+      }));
+    } catch (error) {
+      setAppState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof APIError ? error.message : 'Email sending failed',
+      }));
+    }
+  };
+
+  const renderCurrentStep = () => {
+    switch (appState.currentStep) {
+      case 'upload':
+        return (
+          <FileUpload
+            onFileSelect={handleFileSelect}
+            isLoading={appState.isLoading}
+            error={appState.error}
+          />
+        );
+      case 'analysis':
+        return appState.scores ? (
+          <ScoreCard
+            scores={appState.scores}
+            onGenerateEssay={handleGenerateEssay}
+            isGenerating={appState.isLoading}
+          />
+        ) : null;
+      case 'essay':
+        return (
+          <EssayEditor
+            essay={appState.essay}
+            onEssayChange={(essay) => setAppState(prev => ({ ...prev, essay }))}
+            onRegenerate={handleRegenerateEssay}
+            onSendEmail={handleSendEmail}
+            isLoading={appState.isLoading}
+            error={appState.error}
+          />
+        );
+      case 'export':
+        return (
+          <ExportPage
+            essay={appState.essay}
+            onStartOver={() => setAppState({
+              currentStep: 'upload',
+              isLoading: false,
+              scores: null,
+              essay: '',
+              sessionId: null,
+              error: null,
+            })}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const steps = [
+    { id: 'upload', label: 'Upload Resume', icon: '📤' },
+    { id: 'analysis', label: 'APM Fit Score', icon: '📊' },
+    { id: 'essay', label: 'AI Essay', icon: '✍️' },
+    { id: 'export', label: 'Export & Share', icon: '🚀' },
+  ];
+
+  const currentStepIndex = steps.findIndex(step => step.id === appState.currentStep);
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      {/* Header - Static Blue-Purple Gradient Banner */}
+      <header style={{
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        right: '0',
+        zIndex: '50',
+        background: 'linear-gradient(to right, #2563eb, #7c3aed)',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+      }}>
+        <div style={{ 
+          maxWidth: '1280px', 
+          margin: '0 auto', 
+          padding: '24px 32px',
+          textAlign: 'center'
+        }}>
+          <h1 style={{
+            fontSize: '36px',
+            fontWeight: '600',
+            color: 'white',
+            marginBottom: '8px',
+            margin: '0 0 8px 0'
+          }}>
+            ProfileCrafted<span style={{ opacity: '0.9' }}>.com</span>
+          </h1>
+          <p style={{
+            color: 'rgba(255, 255, 255, 0.9)',
+            fontSize: '18px',
+            fontWeight: '500',
+            margin: '0'
+          }}>
+            Your intelligent partner for APM application success
+          </p>
+        </div>
+      </header>
+
+      {/* Main Content - Foundation: 1280px Centered Container with Fixed Header Padding */}
+      <main style={{ 
+        maxWidth: '1280px', 
+        margin: '0 auto', 
+        padding: '140px 32px 48px 32px' 
+      }}>
+        {renderCurrentStep()}
+      </main>
+
+      {/* Footer - Foundation: 1280px Centered Container */}
+      <footer className="border-t border-gray-200 mt-24 bg-white">
+        <div className="max-w-7xl mx-auto px-8 py-8 text-center">
+          <p className="text-gray-600 font-medium">
+            Built for aspiring APMs • Powered by AI
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
