@@ -41,7 +41,9 @@
     "winston": "^3.11.0",
     "express-slow-down": "^2.0.1",
     "express-mongo-sanitize": "^2.2.0",
-    "xss": "^1.0.14"
+    "xss": "^1.0.14",
+    "@aws-sdk/client-s3": "^3.490.0",
+    "@aws-sdk/s3-request-presigner": "^3.490.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
