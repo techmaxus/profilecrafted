@@ -212,7 +212,7 @@ export default function ExportPage({ essay, onStartOver }: ExportPageProps) {
 
       {/* Final Message - Premium Light Theme */}
       <div className="text-center bg-gradient-to-r from-accent-blue/5 to-accent-green/5 border border-accent-blue/20 rounded-xl p-8 shadow-light-md">
-        <h3 className="text-2xl font-bold text-light-text mb-2">🎉 You're All Set!</h3>
+        <h3 className="text-2xl font-bold text-light-text mb-2">🎉 You&apos;re All Set!</h3>
         <p className="text-light-text-secondary text-lg">
           Good luck with your APM application!
         </p>
