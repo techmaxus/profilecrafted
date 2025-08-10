@@ -1,32 +1,9 @@
 {
   "version": 2,
   "name": "profilecrafted",
-  "builds": [
-    {
-      "src": "profilecrafted-frontend/package.json",
-      "use": "@vercel/next"
-    },
-    {
-      "src": "profilecrafted-backend/src/server.production.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "profilecrafted-backend/src/server.production.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "profilecrafted-frontend/$1"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "functions": {
-    "profilecrafted-backend/src/server.production.js": {
-      "maxDuration": 30
-    }
-  }
+  "buildCommand": "cd profilecrafted-frontend && npm install && npm run build",
+  "outputDirectory": "profilecrafted-frontend/.next",
+  "installCommand": "cd profilecrafted-frontend && npm install",
+  "framework": "nextjs",
+  "rootDirectory": "profilecrafted-frontend"
 }
