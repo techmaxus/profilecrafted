@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import crypto from 'crypto';
 
+// CORS headers
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
+
 // Initialize R2 client
 const r2Client = new S3Client({
   region: process.env.CLOUDFLARE_R2_REGION || 'auto',
@@ -12,6 +19,14 @@ const r2Client = new S3Client({
   },
   forcePathStyle: true,
 });
+
+// Handle preflight requests
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -89,6 +104,8 @@ export async function POST(request: NextRequest) {
       size: file.size,
       uploadedAt: new Date().toISOString(),
       message: 'File uploaded successfully'
+    }, {
+      headers: corsHeaders
     });
 
   } catch (error) {
@@ -99,7 +116,10 @@ export async function POST(request: NextRequest) {
         error: 'Failed to upload file',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: corsHeaders
+      }
     );
   }
 }

@@ -6,12 +6,15 @@
 export const config = {
   // API Configuration
   api: {
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || '',
     endpoints: {
-      uploadResume: '/api/upload-resume',
+      uploadResume: '/api/upload',
       generateEssay: '/api/generate-essay',
       regenerateEssay: '/api/regenerate-essay',
       sendEmail: '/api/send-email',
+      analyze: '/api/analyze',
+      health: '/api/health',
+      status: '/api/status',
     },
   },
 
