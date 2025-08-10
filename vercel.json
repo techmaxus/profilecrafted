@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "profilecrafted-frontend/api/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "profilecrafted-frontend/$1"
     }
