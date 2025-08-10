@@ -4,6 +4,5 @@
   "buildCommand": "cd profilecrafted-frontend && npm install && npm run build",
   "outputDirectory": "profilecrafted-frontend/.next",
   "installCommand": "cd profilecrafted-frontend && npm install",
-  "framework": "nextjs",
-  "rootDirectory": "profilecrafted-frontend"
+  "framework": "nextjs"
 }
