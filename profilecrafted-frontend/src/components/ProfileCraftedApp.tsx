@@ -45,7 +45,7 @@ export default function ProfileCraftedApp() {
     setAppState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      const response = await api.generateEssay(appState.scores, appState.sessionId);
+      const response = await api.generateEssay(appState.scores as unknown as Record<string, unknown>, appState.sessionId);
       setAppState(prev => ({
         ...prev,
         isLoading: false,
@@ -67,7 +67,7 @@ export default function ProfileCraftedApp() {
     setAppState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      const response = await api.regenerateEssay(appState.scores, appState.sessionId);
+      const response = await api.regenerateEssay(appState.scores as unknown as Record<string, unknown>, appState.sessionId, 'User requested regeneration');
       setAppState(prev => ({
         ...prev,
         isLoading: false,
