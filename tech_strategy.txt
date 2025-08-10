@@ -1,0 +1,85 @@
+Overall Architectural Strategy
+The application logically breaks down into a few core services. To ensure scalability and maintainability, I recommend a modular backend architecture that the frontend interacts with via a unified API gateway. The long-running tasks of parsing and essay generation are critical; they must be handled asynchronously to meet the specified performance and responsiveness NFRs.
+
+Here's a high-level architectural blueprint:
+
+Frontend: A modern single-page application (SPA) framework like React or Vue is well-suited. Their component-based nature aligns perfectly with the UI mockups, and they provide the necessary reactivity for features like loading states and the live word counter.
+
+
+
+
+API Gateway: A single entry point that routes requests from the frontend to the appropriate backend service. This simplifies the frontend logic and centralizes concerns like authentication and rate limiting.
+
+Asynchronous Job Queue: A message broker like RabbitMQ or AWS SQS is essential. When a user uploads a resume, the web server should publish a parse_resume job to the queue and immediately return a 202 Accepted response to the frontend. The frontend can then poll a status endpoint or use WebSockets to wait for the result. This pattern is crucial for the resume parsing (AC1.4: 10s) and essay generation (AC3.7: 15s) steps, preventing HTTP timeouts and keeping the UI responsive.
+
+Backend Services:
+
+Resume Parsing Service: A dedicated worker that consumes jobs from the queue. It will download the file, use a library like Apache Tika (Java) or 
+
+pdf-parse/docx (Node.js) to extract text, and then apply logic to structure the data.
+
+
+Scoring Service: A lightweight service that takes the parsed JSON data and applies the business logic (keywords, weights) to calculate the five category scores and the overall score.
+
+
+
+AI Generation Service: This service will act as a wrapper for the third-party AI provider (e.g., OpenAI ). It will be responsible for prompt engineering—crafting a detailed prompt that includes the parsed resume data, the scorecard results, and instructions on tone and length. It will also handle API key management, retries, and error handling for timeouts or rate limits.
+
+
+
+
+
+Key Technical Risks & Mitigation
+While the plan is solid, a few areas carry inherent technical risk that we should address early.
+
+1. Resume Parsing Accuracy
+This is the most significant challenge. The AC requires extracting structured data like "estimated years of experience" and "general relevance". Resumes lack a standard format, making this notoriously difficult.
+
+Risk: The parser may fail on non-standard layouts, produce inaccurate data, or miss key information, leading to poor scores and essays. The 10-second performance NFR  could be difficult to meet with complex parsing logic.
+
+Mitigation:
+
+Start Simple: For the MVP, we should focus on more reliable, keyword-based extraction (e.g., counting skill keywords, identifying company names) rather than complex semantic analysis.
+
+PoC Spike: Dedicate a short "spike" to building a proof-of-concept. Test multiple libraries against a diverse set of 20-30 real-world resumes to benchmark accuracy and performance.
+
+
+Graceful Degradation: If structured parsing fails, the system should fall back to using the raw text of the resume for the subsequent steps, ensuring the user journey isn't completely blocked.
+
+2. AI Essay Generation Quality
+The success of the core product hinges on the quality of the generated essay.
+
+Risk: The LLM may "hallucinate" incorrect details, fail to properly integrate the user's strengths from their resume, or produce generic, uninspired text. Adhering to the ~400 word count and professional tone  also requires careful management.
+
+
+
+Mitigation:
+
+Advanced Prompt Engineering: This is non-negotiable. The prompt sent to the AI must be meticulously engineered. It should include explicit instructions, few-shot examples, and placeholders for all the structured data from the resume and scorecard. For example: "You are an assistant helping a candidate write a 400-word essay for an Associate Product Manager role at Perplexity. The candidate's key strength is 'Product Thinking' (score: 80/100). Emphasize their experience at [Company Name] where they [Achievement]. Maintain a professional yet conversational tone."
+
+Iterative Testing: We must budget time for extensive testing and refinement of the prompts based on the output quality.
+
+3. Frontend State Management
+The user progresses through a distinct multi-step flow (Upload -> Score -> Essay -> Export).
+
+Risk: If a user refreshes the browser on the "Essay Output" page, the application could lose the context of the parsed resume and scorecard, breaking the flow. This relates directly to 
+
+AC5.6, which requires redirecting users if they access a screen out of order.
+
+
+Mitigation:
+
+Session Storage: Use the browser's sessionStorage to persist the parsed data and scores across page loads within a single session.
+
+State Guarding: Implement route guards in the frontend application. Before rendering the essay or export page, the guard will check if the required data exists in sessionStorage. If not, it will redirect the user to the initial upload screen as specified.
+
+Final Recommendations
+Prioritize the Asynchronous Backend: Build the job queue and worker pattern first. This is the foundation for a scalable and responsive application.
+
+De-risk Resume Parsing Immediately: Begin the parsing PoC spike in parallel with UI development. The results will inform the true capabilities of our MVP.
+
+
+Make the Scoring Engine Configurable: The "keywords, weights, multipliers"  for scoring should be stored in a configuration file or database, not hardcoded. This allows the product team to tweak the scoring logic without requiring a new deployment.
+
+
+Embrace Feature Flags: For complex features like the "Email to self" functionality, use feature flags. This allows us to deploy the code but keep the feature hidden until it's fully tested and stable.

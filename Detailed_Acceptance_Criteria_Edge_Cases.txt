@@ -1,0 +1,218 @@
+Detailed Acceptance Criteria & Edge Cases - ProfileCrafted.com APM Tool
+This document outlines the specific acceptance criteria for each core feature of the ProfileCrafted.com Perplexity APM Essay Generator + Role Fit Analyzer MVP, including expected behavior for happy paths, edge cases, and error handling.
+
+1. Resume Upload & Parsing Feature
+Functional Requirements:
+AC1.1 - File Upload: Users can successfully upload a resume file via:
+
+Drag-and-drop onto the designated area.
+
+Clicking the "Browse Files" button and selecting a file from their local system.
+
+AC1.2 - Supported Formats: The system accepts only .pdf and .docx file types.
+
+AC1.3 - Data Extraction: Upon successful upload, the backend service accurately extracts structured data, including:
+
+Contact Information (email, phone, if present)
+
+Experience (company names, roles, estimated years of experience, general relevance)
+
+Education (institutions, degrees)
+
+Skills (technical, product, total count)
+
+Achievements (key achievement phrases, indication of quantifiable results)
+
+Raw Text of the resume.
+
+Non-Functional Requirements:
+AC1.4 - Performance (Parsing): Resume parsing completes within 10 seconds for average-sized resumes (up to 2 pages, standard formatting).
+
+AC1.5 - UI Responsiveness: The UI remains responsive during the upload and parsing process, displaying a clear loading indicator.
+
+Error Handling & Edge Cases:
+AC1.6 - Invalid File Type: If a user attempts to upload a file type other than PDF or DOCX:
+
+UI: A clear, user-friendly error message "Invalid file type. Only PDF and DOCX files are allowed." is displayed.
+
+Behavior: The file is not uploaded/processed.
+
+AC1.7 - File Size Exceeded: If a user uploads a file larger than 5MB:
+
+UI: A clear, user-friendly error message "File too large. Maximum size is 5MB." is displayed.
+
+Behavior: The file is not uploaded/processed.
+
+AC1.8 - No File Uploaded: If the user attempts to proceed without selecting/dropping a file:
+
+UI: A prompt or message indicating "No file uploaded. Please select a resume."
+
+AC1.9 - Parsing Failure (Backend): If the backend fails to parse the resume content (e.g., corrupted file, unreadable format):
+
+UI: A general error message "Unable to parse resume. Please ensure it contains readable text or try a different file." is displayed.
+
+Behavior: The user is guided back to the upload screen or presented with an option to retry.
+
+AC1.10 - Network/API Error during Upload: If there's a network issue or backend API is unreachable during upload:
+
+UI: A generic error message "An error occurred during upload. Please check your internet connection and try again."
+
+Behavior: The upload attempt fails, and the loading indicator is dismissed.
+
+2. Role Fit Scorecard Generation Feature
+Functional Requirements:
+AC2.1 - Scorecard Display: After successful resume parsing, the "Role Fit Scorecard" screen displays:
+
+"Your ProfileCrafted.com APM Fit Score" title.
+
+A prominent Overall Score (0–100).
+
+Individual scores (0–100) for all 5 categories: Technical Fluency, Product Thinking, Curiosity & Creativity, Communication Clarity, and Leadership & Teamwork.
+
+At least one brief, one-line tip for improvement per category.
+
+AC2.2 - Score Calculation Accuracy: The backend's ScoringEngine accurately calculates scores based on the parsed resume data and the defined Perplexity APM criteria (keywords, weights, multipliers).
+
+AC2.3 - "Generate My Essay" Button: This button is enabled when the scorecard is fully loaded and allows the user to proceed to essay generation.
+
+Non-Functional Requirements:
+AC2.4 - Performance (Scoring): Scorecard generation (from receiving parsed data to display) completes within 5 seconds.
+
+AC2.5 - UI Responsiveness: A loading indicator is shown while the scorecard data is being fetched/calculated.
+
+Error Handling & Edge Cases:
+AC2.6 - Missing Resume Data: If the scorecard generation endpoint is called without valid resumeData:
+
+Backend: Returns a 400 Bad Request.
+
+UI: Displays an error message "Failed to generate scorecard. Missing resume data." and advises the user to re-upload.
+
+AC2.7 - Scoring Engine Failure: If an internal error occurs within the ScoringEngine on the backend:
+
+Backend: Returns a 500 Internal Server Error.
+
+UI: Displays a generic error "Failed to generate scorecard. Please try again later."
+
+AC2.8 - API Unreachable: If the frontend cannot reach the /api/generate-scorecard endpoint:
+
+UI: Displays a network error message "Could not connect to the server to generate your scorecard. Please check your connection."
+
+3. Essay Generation & Output Feature
+Functional Requirements:
+AC3.1 - Initial Essay Display: Upon clicking "Generate My Essay," the "Essay Output" screen loads with:
+
+An editable text area containing the AI-generated essay (approx. 400 words).
+
+A real-time word counter that updates as the user types.
+
+AC3.2 - Essay Tailoring: The generated essay incorporates relevant information from the parsed resume data and the APM scorecard, focusing on strengths and Perplexity's context.
+
+AC3.3 - "Regenerate" Functionality:
+
+Action: Clicking "Regenerate" requests a new version of the essay from the AI.
+
+Behavior: The new essay replaces the current one in the text area. The word count updates.
+
+AC3.4 - "Edit" Functionality: The text area is editable, allowing users to manually modify the essay. The word counter updates dynamically.
+
+AC3.5 - "Copy" Functionality: Clicking "Copy" copies the current essay content (from the text area) to the user's clipboard.
+
+AC3.6 - "Export" Button: Navigates the user to the "Export & Finish" screen.
+
+Non-Functional Requirements:
+AC3.7 - Performance (Generation): Initial essay generation completes within 15 seconds. Regeneration completes within 10 seconds.
+
+AC3.8 - Word Count Adherence: The AI-generated essay is consistently around 400 words (e.g., within 380-420 words range).
+
+AC3.9 - UI Responsiveness: A clear loading indicator is displayed while the essay is being generated/regenerated.
+
+AC3.10 - AI Tone & Style: The essay maintains a professional yet conversational tone, as defined in the AI Service prompt guidelines.
+
+Error Handling & Edge Cases:
+AC3.11 - Missing Input Data: If the essay generation/regeneration endpoint is called without resumeData or scorecard (and currentEssay for regeneration):
+
+Backend: Returns a 400 Bad Request.
+
+UI: Displays an error message "Failed to generate essay. Missing required data."
+
+AC3.12 - AI Service Failure/Timeout: If the OpenAI API call fails, times out, or returns an error:
+
+Backend: Handles the error gracefully and returns a generic error.
+
+UI: Displays a user-friendly error message "Could not generate essay. Our AI service is currently unavailable. Please try again later."
+
+Behavior: The loading indicator is dismissed, and the text area remains empty or shows the previous content.
+
+AC3.13 - AI Rate Limit Exceeded: If the backend hits the OpenAI API rate limit:
+
+Backend: Returns a specific error (e.g., 429 Too Many Requests).
+
+UI: Displays "Too many requests. Please wait a moment and try again."
+
+AC3.14 - Copy to Clipboard Failure: If document.execCommand('copy') fails for any reason (e.g., browser restrictions):
+
+UI: Optionally display a message "Failed to copy to clipboard. Please copy manually."
+
+Behavior: The user can still manually select and copy the text.
+
+4. Export & Finish Feature
+Functional Requirements:
+AC4.1 - Export Options Display: The "Export & Finish" screen presents options: "Copy to clipboard," "Download as .txt," and "Email to self (Optional)."
+
+AC4.2 - "Copy to clipboard": Clicking this button copies the latest essay content to the user's clipboard.
+
+AC4.3 - "Download as .txt": Clicking this button triggers a download of the essay content as a plain text file (.txt).
+
+AC4.4 - "Email to self":
+
+Input: A visible input field for the user to enter their email address.
+
+Action: Clicking the "Send" button sends the essay to the provided email address via the backend service.
+
+Confirmation: A success message "Essay sent successfully to your email" is displayed.
+
+AC4.5 - Social Share Links: Buttons/icons for sharing on Twitter, LinkedIn, and Facebook launch respective sharing dialogs with pre-filled content (e.g., link to ProfileCrafted.com, a short promotional message).
+
+AC4.6 - Thank-You Note: Displays "Good luck with your Perplexity APM application!"
+
+Non-Functional Requirements:
+AC4.7 - Performance (Export): Copy and Download actions are instant. Email send feedback (UI message) is received within 5 seconds.
+
+Error Handling & Edge Cases:
+AC4.8 - Email Validation (Frontend/Backend):
+
+UI: Frontend validation for valid email format on the email input field.
+
+Backend: Backend validation for a valid email address before attempting to send.
+
+Error: If invalid, displays "Please provide a valid email address."
+
+AC4.9 - Email Sending Failure: If the backend's email service fails to send the email:
+
+Backend: Logs the error.
+
+UI: Displays "Failed to send email. Please try downloading or copying instead."
+
+AC4.10 - No Essay Content: If somehow the export screen is reached without essay content:
+
+UI: Export buttons are disabled, or a message "No essay to export." is shown.
+
+5. Global UI & Navigation
+Functional Requirements:
+AC5.1 - Responsive Design: The application's layout and elements adapt gracefully to various screen sizes (desktop, tablet, mobile), ensuring optimal usability on all devices.
+
+AC5.2 - Persistent Header: The header with "ProfileCrafted.com" and navigation links remains visible and functional across all main application screens.
+
+AC5.3 - Mobile Navigation: On mobile, a clear menu or navigation pattern (e.g., bottom navigation bar or hamburger menu) allows users to move between main sections.
+
+Non-Functional Requirements:
+AC5.4 - Fast Transitions: Screen transitions are smooth and immediate, contributing to a "fast feedback loop" (under 1 second for simple navigations).
+
+AC5.5 - UI Consistency: Styling (colors, fonts, rounded corners, button styles) is consistent across all screens.
+
+Error Handling & Edge Cases:
+AC5.6 - Invalid Route/State: If a user tries to access a screen in an illogical order (e.g., directly to Essay Output without generating an essay):
+
+Behavior: The application should redirect them to the appropriate preceding screen (e.g., Landing Page or Upload Screen).
+
+UI: Optionally, a brief message like "Please upload your resume to begin."
