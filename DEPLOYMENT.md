@@ -71,7 +71,7 @@ ENCRYPTION_KEY=your_32_byte_hex_encryption_key
 
 # OpenAI (if using for essay generation)
 OPENAI_API_KEY=your_openai_api_key_here
-OPENAI_MODEL=gpt-4
+OPENAI_MODEL=gpt-4o-mini
 
 # File Upload
 MAX_FILE_SIZE=5242880
