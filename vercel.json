@@ -3,10 +3,17 @@
   "builds": [
     {
       "src": "profilecrafted-frontend/package.json",
-      "use": "@vercel/next",
-      "config": {
-        "zeroConfig": true
-      }
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "profilecrafted-frontend/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "profilecrafted-frontend/$1"
     }
   ]
 }
