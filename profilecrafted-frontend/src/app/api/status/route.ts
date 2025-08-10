@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Check environment variables and service readiness
     const requiredEnvVars = [
@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
         openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini'
       }
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { 
         ready: false,

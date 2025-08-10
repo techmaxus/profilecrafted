@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     return NextResponse.json({
       status: 'OK',
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       },
       version: '1.0.0'
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Health check failed' },
       { status: 500 }

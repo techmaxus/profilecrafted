@@ -104,7 +104,7 @@ Format your response as JSON with this structure:
     let analysis;
     try {
       analysis = JSON.parse(analysisResult);
-    } catch (parseError) {
+    } catch {
       // If JSON parsing fails, create a fallback response
       analysis = {
         overallScore: 75,

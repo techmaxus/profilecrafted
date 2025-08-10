@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
 // Completely disable SSR to prevent hydration issues
 export default function Home() {
@@ -22,6 +23,8 @@ export default function Home() {
   }
 
   // Dynamic import only on client side
-  const ProfileCraftedApp = require('@/components/ProfileCraftedApp').default;
+  const ProfileCraftedApp = dynamic(() => import('@/components/ProfileCraftedApp'), {
+    ssr: false
+  });
   return <ProfileCraftedApp />;
 }
