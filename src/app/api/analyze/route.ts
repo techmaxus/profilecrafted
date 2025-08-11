@@ -23,20 +23,30 @@ const openai = new OpenAI({
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('🔍 Analysis API called');
+    
     // Check if OpenAI is configured
     if (!process.env.OPENAI_API_KEY) {
+      console.log('❌ OpenAI API key not configured');
       return NextResponse.json(
         { error: 'AI service not configured' },
-        { status: 500 }
+        { status: 500, headers: corsHeaders }
       );
     }
 
+    console.log('✅ OpenAI API key configured');
     const { resumeText, fileKey } = await request.json();
+    console.log('📄 Request data:', { 
+      hasResumeText: !!resumeText, 
+      resumeTextLength: resumeText?.length || 0,
+      fileKey: fileKey 
+    });
 
     if (!resumeText) {
+      console.log('❌ No resume text provided');
       return NextResponse.json(
         { error: 'Resume text is required' },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       );
     }
 
@@ -93,6 +103,7 @@ Format your response as JSON with this structure:
 `;
 
     // Call OpenAI API
+    console.log('🤖 Calling OpenAI API with model:', process.env.OPENAI_MODEL || 'gpt-4o-mini');
     const completion = await openai.chat.completions.create({
       model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
       messages: [
@@ -109,7 +120,9 @@ Format your response as JSON with this structure:
       max_tokens: 2000,
     });
 
+    console.log('✅ OpenAI API response received');
     const analysisResult = completion.choices[0]?.message?.content;
+    console.log('📊 Analysis result length:', analysisResult?.length || 0);
 
     if (!analysisResult) {
       throw new Error('No analysis result from AI');
@@ -118,8 +131,12 @@ Format your response as JSON with this structure:
     // Parse the JSON response
     let analysis;
     try {
+      console.log('🔄 Parsing JSON response from OpenAI');
       analysis = JSON.parse(analysisResult);
-    } catch {
+      console.log('✅ JSON parsing successful');
+    } catch (parseError) {
+      console.log('❌ JSON parsing failed, using fallback response');
+      console.log('Parse error:', parseError instanceof Error ? parseError.message : 'Unknown');
       // If JSON parsing fails, create a fallback response
       analysis = {
         overallScore: 75,
@@ -156,6 +173,7 @@ Format your response as JSON with this structure:
       };
     }
 
+    console.log('🎉 Analysis completed successfully, sending response');
     return NextResponse.json({
       success: true,
       analysis: analysis,
