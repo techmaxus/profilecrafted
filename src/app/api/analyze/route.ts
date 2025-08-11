@@ -86,17 +86,21 @@ Please analyze this resume for APM roles and provide:
 
 Format your response as JSON with this structure:
 {
-  "overallScore": number,
-  "categoryScores": {
-    "technical": number,
-    "productSense": number,
-    "leadership": number,
-    "analytics": number,
-    "communication": number
+  "overall": number,
+  "technicalFluency": number,
+  "productThinking": number,
+  "curiosityCreativity": number,
+  "communicationClarity": number,
+  "leadershipTeamwork": number,
+  "tips": {
+    "technicalFluency": string,
+    "productThinking": string,
+    "curiosityCreativity": string,
+    "communicationClarity": string,
+    "leadershipTeamwork": string
   },
   "strengths": [string, string, string],
   "improvements": [string, string, string],
-  "recommendations": [string, string, string],
   "experienceAnalysis": {
     "productExperience": string,
     "technicalBackground": string,
@@ -203,28 +207,30 @@ Format your response as JSON with this structure:
       const hasLeadership = resumeText.toLowerCase().includes('lead') || resumeText.toLowerCase().includes('manage') || resumeText.toLowerCase().includes('team');
       
       const fallbackAnalysis = {
-        overallScore: Math.min(85, Math.max(65, Math.floor(resumeLength / 700) + 60)),
-        categoryScores: {
-          technicalFluency: hasTech ? Math.floor(Math.random() * 20) + 70 : Math.floor(Math.random() * 15) + 60,
-          productThinking: Math.floor(Math.random() * 20) + 65,
-          leadershipTeamwork: hasLeadership ? Math.floor(Math.random() * 25) + 70 : Math.floor(Math.random() * 20) + 55,
-          curiosityCreativity: hasTech ? Math.floor(Math.random() * 20) + 75 : Math.floor(Math.random() * 15) + 65,
-          communicationClarity: Math.floor(Math.random() * 20) + 70
+        overall: Math.min(85, Math.max(65, Math.floor(resumeLength / 700) + 60)),
+        technicalFluency: hasTech ? Math.floor(Math.random() * 20) + 70 : Math.floor(Math.random() * 15) + 60,
+        productThinking: Math.floor(Math.random() * 20) + 65,
+        leadershipTeamwork: hasLeadership ? Math.floor(Math.random() * 25) + 70 : Math.floor(Math.random() * 20) + 55,
+        curiosityCreativity: hasTech ? Math.floor(Math.random() * 20) + 75 : Math.floor(Math.random() * 15) + 65,
+        communicationClarity: Math.floor(Math.random() * 20) + 70,
+        tips: {
+          technicalFluency: "Focus on quantifying your technical impact and showcasing specific tools/technologies you've used",
+          productThinking: "Highlight examples of product strategy, user research, and data-driven decision making",
+          curiosityCreativity: "Demonstrate innovative problem-solving and your approach to exploring new solutions",
+          communicationClarity: "Show evidence of clear written communication and cross-functional collaboration",
+          leadershipTeamwork: "Provide specific examples of leading projects or mentoring team members"
         },
         strengths: [
           "Strong analytical and problem-solving capabilities",
           "Good technical foundation with relevant experience",
-          "Clear communication and presentation skills"
+          "Demonstrates clear communication skills",
+          "Shows potential for product management growth"
         ],
         improvements: [
           "Develop deeper product strategy experience",
-          "Enhance cross-functional leadership skills",
-          "Build stronger metrics and experimentation background"
-        ],
-        recommendations: [
-          "Consider taking product management courses or certifications",
-          "Seek opportunities to lead cross-functional projects",
-          "Build portfolio of data-driven product decisions"
+          "Gain more cross-functional collaboration experience",
+          "Build stronger data analysis capabilities",
+          "Enhance user research and customer empathy skills"
         ],
         experienceAnalysis: {
           productExperience: hasEducation ? "Relevant educational background with some practical experience" : "Some relevant experience identified",
