@@ -236,10 +236,21 @@ export default function ProfileCraftedApp() {
       </main>
 
       {/* Footer - Foundation: 1280px Centered Container */}
-      <footer className="border-t border-gray-200 mt-24 bg-white">
+      <footer className="bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-8 py-8 text-center">
           <p className="text-gray-600 font-medium">
             Built for aspiring APMs • Powered by AI
+          </p>
+          <p className="text-gray-500 text-sm mt-2">
+            Vibe coded by{' '}
+            <a 
+              href="https://www.linkedin.com/in/techmaxus/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium"
+            >
+              Lakshay Kapoor
+            </a>
           </p>
         </div>
       </footer>
