@@ -10,7 +10,6 @@ interface FileUploadProps {
 }
 
 export default function FileUpload({ onFileSelect, isLoading, error }: FileUploadProps) {
-  const [dragActive, setDragActive] = useState(false);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {

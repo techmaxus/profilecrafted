@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { AppState, ScoreWithTips } from '@/types';
+import { useState } from 'react';
+import { AppState } from '@/types';
 import { api, APIError } from '@/lib/api';
 import FileUpload from '@/components/FileUpload';
 import ScoreCard from '@/components/ScoreCard';

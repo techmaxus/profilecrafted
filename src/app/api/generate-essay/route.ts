@@ -22,7 +22,7 @@ const openai = new OpenAI({
 });
 
 export async function POST(request: NextRequest) {
-  let analysis: any = null;
+  let analysis: Record<string, unknown> | null = null;
   let targetLength = 400;
   
   try {
@@ -120,8 +120,14 @@ Format as a single, well-structured essay without headers or bullet points.
       console.log('🔄 OpenAI quota exceeded, using fallback essay');
       
       // Generate intelligent fallback essay based on analysis scores
-      const overallScore = analysis?.overallScore || 75;
-      const categoryScores = analysis?.categoryScores || {};
+      const overallScore = (analysis?.overallScore as number) || 75;
+      const categoryScores = (analysis?.categoryScores as Record<string, number>) || {
+        technical: 70,
+        analytics: 70,
+        productSense: 70,
+        leadership: 65,
+        communication: 75
+      };
       
       const fallbackEssay = `As an aspiring Associate Product Manager, I am excited to contribute to innovative product development and drive meaningful user experiences. My background demonstrates a strong foundation in analytical thinking and problem-solving, which are essential for success in product management roles.
 
