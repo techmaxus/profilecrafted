@@ -80,7 +80,7 @@ export const api = {
   },
 
   async sendEmail(email: string, essay: string) {
-    const response = await fetch(`${API_BASE_URL}/api/send-email`, {
+    const response = await fetch('/api/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
