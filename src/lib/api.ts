@@ -1,6 +1,7 @@
 import { config } from './config';
 
-const API_BASE_URL = config.api.baseUrl;
+// Note: API_BASE_URL kept for future use if needed
+// const API_BASE_URL = config.api.baseUrl;
 
 export class APIError extends Error {
   constructor(message: string, public status?: number) {
