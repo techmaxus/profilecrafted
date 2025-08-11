@@ -9,13 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.864.0",
+    "@aws-sdk/s3-request-presigner": "^3.490.0",
+    "dotenv": "^17.2.1",
     "next": "15.4.6",
+    "openai": "^4.24.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-dropzone": "^14.3.8",
-    "@aws-sdk/client-s3": "^3.490.0",
-    "@aws-sdk/s3-request-presigner": "^3.490.0",
-    "openai": "^4.24.1"
+    "react-dropzone": "^14.3.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

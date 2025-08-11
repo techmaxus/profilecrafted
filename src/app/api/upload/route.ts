@@ -30,20 +30,11 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
-    // Debug environment variables (remove in production)
-    console.log('R2 Config Debug:', {
-      accountId: process.env.CLOUDFLARE_R2_ACCOUNT_ID ? 'SET' : 'MISSING',
-      accessKeyId: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID ? 'SET' : 'MISSING',
-      secretKey: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY ? 'SET' : 'MISSING',
-      bucketName: process.env.CLOUDFLARE_R2_BUCKET_NAME ? 'SET' : 'MISSING',
-      endpoint: `https://${process.env.CLOUDFLARE_R2_ACCOUNT_ID}.r2.cloudflarestorage.com`
-    });
-
     // Check if R2 is configured
     if (!process.env.CLOUDFLARE_R2_ACCOUNT_ID || !process.env.CLOUDFLARE_R2_ACCESS_KEY_ID) {
       return NextResponse.json(
         { error: 'Storage not configured' },
-        { status: 500 }
+        { status: 500, headers: corsHeaders }
       );
     }
 
@@ -118,18 +109,12 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Upload error details:', {
-      message: error instanceof Error ? error.message : 'Unknown error',
-      name: error instanceof Error ? error.name : 'Unknown',
-      stack: error instanceof Error ? error.stack : 'No stack trace',
-      fullError: error
-    });
+    console.error('Upload error:', error instanceof Error ? error.message : 'Unknown error');
     
     return NextResponse.json(
       { 
         success: false,
-        error: `Upload failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        details: error instanceof Error ? error.message : 'Unknown error'
+        error: 'Failed to upload file'
       },
       { 
         status: 500,

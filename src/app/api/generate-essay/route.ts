@@ -1,6 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
+// CORS headers
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
+
+// Handle preflight requests
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
+
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

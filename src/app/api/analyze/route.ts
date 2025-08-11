@@ -1,6 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
+// CORS headers
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
+
+// Handle preflight requests
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
+
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -147,6 +162,8 @@ Format your response as JSON with this structure:
       fileKey: fileKey,
       analyzedAt: new Date().toISOString(),
       model: process.env.OPENAI_MODEL || 'gpt-4o-mini'
+    }, {
+      headers: corsHeaders
     });
 
   } catch (error) {
@@ -157,7 +174,10 @@ Format your response as JSON with this structure:
         error: 'Failed to analyze resume',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: corsHeaders
+      }
     );
   }
 }
