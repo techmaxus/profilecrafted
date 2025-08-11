@@ -35,14 +35,14 @@ export async function POST(request: NextRequest) {
     }
 
     const requestData = await request.json();
-    analysis = requestData.analysis;
-    const resumeText = requestData.resumeText;
-    const prompt = requestData.prompt;
+    analysis = requestData.scores || requestData.analysis;
+    const resumeText = requestData.resumeText || "Resume analysis completed";
+    const prompt = requestData.prompt || requestData.feedback;
     targetLength = requestData.targetLength || 400;
 
-    if (!analysis || !resumeText) {
+    if (!analysis) {
       return NextResponse.json(
-        { error: 'Analysis and resume text are required' },
+        { error: 'Analysis scores are required' },
         { status: 400 }
       );
     }
