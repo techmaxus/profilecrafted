@@ -150,8 +150,38 @@ Format your response as JSON with this structure:
         cleanedResult = cleanedResult.replace(/^```\s*/, '').replace(/\s*```$/, '');
       }
       
-      analysis = JSON.parse(cleanedResult);
+      const rawAnalysis = JSON.parse(cleanedResult);
       console.log('✅ JSON parsing successful');
+      console.log('🔍 OpenAI response structure:', JSON.stringify(rawAnalysis, null, 2));
+      
+      // Transform OpenAI response to match frontend expectations
+      if (rawAnalysis.overallScore && rawAnalysis.categoryScores) {
+        // Old structure - transform to new flattened structure
+        console.log('🔄 Transforming old structure to flattened format');
+        analysis = {
+          overall: rawAnalysis.overallScore,
+          technicalFluency: rawAnalysis.categoryScores.technical || rawAnalysis.categoryScores.technicalFluency || 0,
+          productThinking: rawAnalysis.categoryScores.productSense || rawAnalysis.categoryScores.productThinking || 0,
+          curiosityCreativity: rawAnalysis.categoryScores.analytics || rawAnalysis.categoryScores.curiosityCreativity || 0,
+          communicationClarity: rawAnalysis.categoryScores.communication || rawAnalysis.categoryScores.communicationClarity || 0,
+          leadershipTeamwork: rawAnalysis.categoryScores.leadership || rawAnalysis.categoryScores.leadershipTeamwork || 0,
+          tips: rawAnalysis.tips || {
+            technicalFluency: "Focus on quantifying your technical impact",
+            productThinking: "Highlight product strategy examples",
+            curiosityCreativity: "Show innovative problem-solving",
+            communicationClarity: "Demonstrate clear communication",
+            leadershipTeamwork: "Provide leadership examples"
+          },
+          strengths: rawAnalysis.strengths || [],
+          improvements: rawAnalysis.improvements || [],
+          experienceAnalysis: rawAnalysis.experienceAnalysis || {},
+          summary: rawAnalysis.summary || "Analysis completed successfully"
+        };
+      } else {
+        // Already in correct flattened structure
+        console.log('✅ Response already in correct flattened format');
+        analysis = rawAnalysis;
+      }
     } catch (parseError) {
       console.log('❌ JSON parsing failed, using fallback response');
       console.log('Parse error:', parseError instanceof Error ? parseError.message : 'Unknown');
