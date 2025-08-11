@@ -22,16 +22,23 @@ const openai = new OpenAI({
 });
 
 export async function POST(request: NextRequest) {
+  let analysis: any = null;
+  let targetLength = 400;
+  
   try {
     // Check if OpenAI is configured
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(
         { error: 'AI service not configured' },
-        { status: 500 }
+        { status: 500, headers: corsHeaders }
       );
     }
 
-    const { analysis, resumeText, prompt, targetLength } = await request.json();
+    const requestData = await request.json();
+    analysis = requestData.analysis;
+    const resumeText = requestData.resumeText;
+    const prompt = requestData.prompt;
+    targetLength = requestData.targetLength || 400;
 
     if (!analysis || !resumeText) {
       return NextResponse.json(
@@ -107,13 +114,54 @@ Format as a single, well-structured essay without headers or bullet points.
 
   } catch (error) {
     console.error('Essay generation error:', error);
+    
+    // Check if it's an OpenAI quota error
+    if (error instanceof Error && (error.message.includes('429') || error.message.includes('quota') || error.message.includes('insufficient_quota'))) {
+      console.log('🔄 OpenAI quota exceeded, using fallback essay');
+      
+      // Generate intelligent fallback essay based on analysis scores
+      const overallScore = analysis?.overallScore || 75;
+      const categoryScores = analysis?.categoryScores || {};
+      
+      const fallbackEssay = `As an aspiring Associate Product Manager, I am excited to contribute to innovative product development and drive meaningful user experiences. My background demonstrates a strong foundation in analytical thinking and problem-solving, which are essential for success in product management roles.
+
+Throughout my career, I have developed valuable skills in data analysis and technical understanding, scoring ${categoryScores.technical || 70}/100 in technical capabilities. This technical foundation enables me to work effectively with engineering teams and understand the feasibility of product features. My analytical skills, rated at ${categoryScores.analytics || 70}/100, allow me to make data-driven decisions and measure product success through meaningful metrics.
+
+In terms of product sense, I have cultivated an understanding of user needs and market dynamics, reflected in my ${categoryScores.productSense || 70}/100 score in this area. I believe that great products start with deep empathy for users and a clear understanding of the problems we're solving. My approach to product development focuses on identifying user pain points and creating solutions that deliver genuine value.
+
+Leadership and communication are areas where I continue to grow, with current scores of ${categoryScores.leadership || 65}/100 and ${categoryScores.communication || 75}/100 respectively. I am committed to developing these skills further through cross-functional collaboration and by taking on increasing responsibilities in product initiatives.
+
+Looking ahead, I am eager to apply my analytical mindset, technical understanding, and growing product intuition to help build products that users love. I am particularly excited about the opportunity to work in a fast-paced environment where I can learn from experienced product leaders while contributing fresh perspectives and innovative ideas.
+
+My overall APM readiness score of ${overallScore}/100 reflects my current capabilities and my potential for growth in this dynamic field. I am committed to continuous learning and development as I pursue my career in product management.`;
+
+      const wordCount = fallbackEssay.trim().split(/\s+/).length;
+      
+      return NextResponse.json({
+        success: true,
+        essay: fallbackEssay,
+        wordCount: wordCount,
+        targetLength: targetLength || 400,
+        generatedAt: new Date().toISOString(),
+        model: 'fallback-generator',
+        fallbackUsed: true,
+        note: "Essay generated using fallback due to API quota limits"
+      }, {
+        headers: corsHeaders
+      });
+    }
+    
+    // For other errors, return standard error response
     return NextResponse.json(
       { 
         success: false,
         error: 'Failed to generate essay',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: corsHeaders
+      }
     );
   }
 }
