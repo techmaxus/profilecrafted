@@ -22,15 +22,43 @@ export default function ProfileCraftedApp() {
     setAppState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      const response = await api.uploadResume(file);
-      setAppState(prev => ({
-        ...prev,
-        isLoading: false,
-        scores: response.analysis,
-        sessionId: response.sessionId,
-        currentStep: 'analysis',
-      }));
+      // Step 1: Upload file to R2
+      const uploadResponse = await api.uploadResume(file);
+      console.log('✅ File uploaded successfully:', uploadResponse);
+      
+      // Step 2: Extract text from uploaded file and analyze
+      const fileReader = new FileReader();
+      fileReader.onload = async (e) => {
+        try {
+          const resumeText = e.target?.result as string;
+          console.log('📄 Analyzing resume text, length:', resumeText?.length);
+          
+          // Step 3: Call analysis API
+          const analysisResponse = await api.analyzeResume(resumeText, uploadResponse.key);
+          console.log('🎯 Analysis completed:', analysisResponse);
+          
+          setAppState(prev => ({
+            ...prev,
+            isLoading: false,
+            scores: analysisResponse.analysis,
+            sessionId: uploadResponse.key, // Use file key as session ID
+            currentStep: 'analysis',
+          }));
+        } catch (analysisError) {
+          console.error('❌ Analysis failed:', analysisError);
+          setAppState(prev => ({
+            ...prev,
+            isLoading: false,
+            error: analysisError instanceof APIError ? analysisError.message : 'Analysis failed',
+          }));
+        }
+      };
+      
+      // Read file as text for analysis
+      fileReader.readAsText(file);
+      
     } catch (error) {
+      console.error('❌ Upload failed:', error);
       setAppState(prev => ({
         ...prev,
         isLoading: false,

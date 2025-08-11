@@ -27,6 +27,23 @@ export const api = {
     return response.json();
   },
 
+  async analyzeResume(resumeText: string, fileKey: string) {
+    const response = await fetch(config.api.endpoints.analyze, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ resumeText, fileKey }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new APIError(error.error || 'Resume analysis failed', response.status);
+    }
+
+    return response.json();
+  },
+
   async generateEssay(scores: Record<string, unknown>, sessionId: string) {
     const response = await fetch(`${API_BASE_URL}/api/generate-essay`, {
       method: 'POST',
