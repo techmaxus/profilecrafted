@@ -45,7 +45,7 @@ export const api = {
   },
 
   async generateEssay(scores: Record<string, unknown>, sessionId: string) {
-    const response = await fetch(`${API_BASE_URL}/api/generate-essay`, {
+    const response = await fetch('/api/generate-essay', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export const api = {
 
   async regenerateEssay(scores: Record<string, unknown>, sessionId: string, feedback: string) {
     // Use the same generate-essay endpoint for regeneration
-    const response = await fetch(`${API_BASE_URL}/api/generate-essay`, {
+    const response = await fetch('/api/generate-essay', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
