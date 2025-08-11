@@ -141,7 +141,16 @@ Format your response as JSON with this structure:
     let analysis;
     try {
       console.log('🔄 Parsing JSON response from OpenAI');
-      analysis = JSON.parse(analysisResult);
+      
+      // Clean the response - remove markdown code blocks if present
+      let cleanedResult = analysisResult.trim();
+      if (cleanedResult.startsWith('```json')) {
+        cleanedResult = cleanedResult.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+      } else if (cleanedResult.startsWith('```')) {
+        cleanedResult = cleanedResult.replace(/^```\s*/, '').replace(/\s*```$/, '');
+      }
+      
+      analysis = JSON.parse(cleanedResult);
       console.log('✅ JSON parsing successful');
     } catch (parseError) {
       console.log('❌ JSON parsing failed, using fallback response');
