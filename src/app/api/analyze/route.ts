@@ -205,11 +205,11 @@ Format your response as JSON with this structure:
       const fallbackAnalysis = {
         overallScore: Math.min(85, Math.max(65, Math.floor(resumeLength / 700) + 60)),
         categoryScores: {
-          technical: hasTech ? Math.floor(Math.random() * 20) + 70 : Math.floor(Math.random() * 15) + 60,
-          productSense: Math.floor(Math.random() * 20) + 65,
-          leadership: hasLeadership ? Math.floor(Math.random() * 25) + 70 : Math.floor(Math.random() * 20) + 55,
-          analytics: hasTech ? Math.floor(Math.random() * 20) + 75 : Math.floor(Math.random() * 15) + 65,
-          communication: Math.floor(Math.random() * 20) + 70
+          technicalFluency: hasTech ? Math.floor(Math.random() * 20) + 70 : Math.floor(Math.random() * 15) + 60,
+          productThinking: Math.floor(Math.random() * 20) + 65,
+          leadershipTeamwork: hasLeadership ? Math.floor(Math.random() * 25) + 70 : Math.floor(Math.random() * 20) + 55,
+          curiosityCreativity: hasTech ? Math.floor(Math.random() * 20) + 75 : Math.floor(Math.random() * 15) + 65,
+          communicationClarity: Math.floor(Math.random() * 20) + 70
         },
         strengths: [
           "Strong analytical and problem-solving capabilities",
