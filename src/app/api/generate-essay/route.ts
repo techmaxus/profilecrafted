@@ -115,8 +115,18 @@ Format as a single, well-structured essay without headers or bullet points.
   } catch (error) {
     console.error('Essay generation error:', error);
     
-    // Check if it's an OpenAI quota error
-    if (error instanceof Error && (error.message.includes('429') || error.message.includes('quota') || error.message.includes('insufficient_quota'))) {
+    // Check if it's an OpenAI quota error (multiple ways to detect)
+    const isQuotaError = (
+      (error as any)?.status === 429 ||
+      (error as any)?.code === 'insufficient_quota' ||
+      (error instanceof Error && (
+        error.message.includes('429') || 
+        error.message.includes('quota') || 
+        error.message.includes('insufficient_quota')
+      ))
+    );
+    
+    if (isQuotaError) {
       console.log('🔄 OpenAI quota exceeded, using fallback essay');
       
       // Generate intelligent fallback essay based on analysis scores
