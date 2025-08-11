@@ -8,7 +8,7 @@ interface EssayEditorProps {
   onRegenerate: () => void;
   onSendEmail: (email: string) => void;
   isLoading: boolean;
-  error: string | null;
+  error?: string | null;
 }
 
 export default function EssayEditor({ 
@@ -16,8 +16,7 @@ export default function EssayEditor({
   onEssayChange, 
   onRegenerate, 
   onSendEmail, 
-  isLoading,
-  error 
+  isLoading 
 }: EssayEditorProps) {
   const [wordCount, setWordCount] = useState(0);
   const [copied, setCopied] = useState(false);

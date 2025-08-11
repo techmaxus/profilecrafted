@@ -10,8 +10,6 @@ interface ExportPageProps {
 
 export default function ExportPage({ essay, onStartOver }: ExportPageProps) {
   const [email, setEmail] = useState('');
-  const [isEmailSending, setIsEmailSending] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -37,15 +35,13 @@ export default function ExportPage({ essay, onStartOver }: ExportPageProps) {
   const handleEmailSend = async () => {
     if (!email.trim()) return;
     
-    setIsEmailSending(true);
     try {
       await api.sendEmail(email, essay);
-      setEmailSent(true);
       setEmail('');
+      alert('Email sent successfully!');
     } catch (error) {
       console.error('Failed to send email:', error);
-    } finally {
-      setIsEmailSending(false);
+      alert('Failed to send email. Please try again.');
     }
   };
 

@@ -116,9 +116,10 @@ Format as a single, well-structured essay without headers or bullet points.
     console.error('Essay generation error:', error);
     
     // Check if it's an OpenAI quota error (multiple ways to detect)
+    const errorObj = error as { status?: number; code?: string };
     const isQuotaError = (
-      (error as any)?.status === 429 ||
-      (error as any)?.code === 'insufficient_quota' ||
+      errorObj?.status === 429 ||
+      errorObj?.code === 'insufficient_quota' ||
       (error instanceof Error && (
         error.message.includes('429') || 
         error.message.includes('quota') || 
