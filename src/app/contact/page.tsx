@@ -67,12 +67,12 @@ export default function Contact() {
           }}>Contact & Support</h1>
           
           <div className="prose prose-gray max-w-none">
-            <section className="mb-8">
+            <section style={{ marginBottom: '48px' }}>
               <h2 style={{
                 fontSize: '28px',
                 fontWeight: '600',
                 color: '#1f2937',
-                marginBottom: '20px',
+                marginBottom: '24px',
                 textAlign: 'center'
               }}>Get in Touch</h2>
               <p style={{
@@ -101,7 +101,7 @@ export default function Contact() {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                 gap: '24px',
-                marginBottom: '24px'
+                marginBottom: '32px'
               }}>
                 <div className="bg-blue-50 p-6 rounded-lg">
                   <h3 className="font-semibold text-blue-900 mb-3 flex items-center">
@@ -177,8 +177,14 @@ export default function Contact() {
               </div>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Additional Information</h2>
+            <section style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Additional Information</h2>
               <div style={{
                 background: '#f3f4f6',
                 padding: '24px',
@@ -199,8 +205,14 @@ export default function Contact() {
               </div>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Technical Support</h2>
+            <section style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Technical Support</h2>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <p className="text-gray-700 mb-4">
                   When contacting technical support, please include:
@@ -215,8 +227,14 @@ export default function Contact() {
               </div>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Feedback & Suggestions</h2>
+            <section style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Feedback & Suggestions</h2>
               <p className="text-gray-700 mb-4">
                 We're constantly working to improve ProfileCrafted based on user feedback. Your input helps us:
               </p>

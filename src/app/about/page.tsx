@@ -284,7 +284,13 @@ export default function About() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Privacy & Security</h2>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Privacy & Security</h2>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <ul className="text-gray-700 space-y-2">
                   <li>✅ <strong>Secure Processing:</strong> All files are processed securely and stored on Cloudflare R2 with enterprise-grade encryption for up to 30 days, then automatically deleted</li>
@@ -296,8 +302,14 @@ export default function About() {
               </div>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Who Should Use ProfileCrafted?</h2>
+            <section style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Who Should Use ProfileCrafted?</h2>
               <ul className="list-disc pl-6 text-gray-700 space-y-2">
                 <li><strong>Aspiring APMs:</strong> Students and professionals targeting APM roles</li>
                 <li><strong>Career Changers:</strong> Those transitioning into product management</li>
@@ -307,8 +319,14 @@ export default function About() {
               </ul>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Limitations & Disclaimers</h2>
+            <section style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Limitations & Disclaimers</h2>
               <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
                 <p className="text-yellow-800 text-sm mb-2">
                   <strong>Important:</strong> ProfileCrafted is an educational tool designed to provide insights and feedback.
@@ -322,9 +340,21 @@ export default function About() {
               </div>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Support & Contact</h2>
-              <p className="text-gray-700 mb-4">
+            <section style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Support & Contact</h2>
+              <p style={{
+                color: '#4b5563',
+                fontSize: '16px',
+                lineHeight: '1.7',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>
                 Questions, feedback, or need help? We're here to assist:
               </p>
               <ul className="text-gray-700 space-y-2">
