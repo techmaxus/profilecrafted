@@ -35,8 +35,8 @@ export default function ProfileCraftedApp() {
           const arrayBuffer = await file.arrayBuffer();
           const pdfjsLib = await import('pdfjs-dist');
           
-          // Set worker source for pdfjs
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+          // Disable worker for simpler, more reliable setup
+          pdfjsLib.GlobalWorkerOptions.workerSrc = '';
           
           const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
           let fullText = '';
