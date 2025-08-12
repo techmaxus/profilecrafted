@@ -31,11 +31,27 @@ export default function ProfileCraftedApp() {
         let resumeText: string;
         
         if (file.type === 'application/pdf') {
-          // Extract text from PDF using pdf-parse
+          // Extract text from PDF using pdfjs-dist (browser-compatible)
           const arrayBuffer = await file.arrayBuffer();
-          const pdfParse = await import('pdf-parse');
-          const pdfData = await pdfParse.default(Buffer.from(arrayBuffer));
-          resumeText = pdfData.text;
+          const pdfjsLib = await import('pdfjs-dist');
+          
+          // Set worker source for pdfjs
+          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+          
+          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+          let fullText = '';
+          
+          // Extract text from all pages
+          for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            const page = await pdf.getPage(pageNum);
+            const textContent = await page.getTextContent();
+            const pageText = textContent.items
+              .map((item: any) => item.str)
+              .join(' ');
+            fullText += pageText + '\n';
+          }
+          
+          resumeText = fullText.trim();
           console.log('📄 PDF text extracted, length:', resumeText?.length);
         } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
           // For DOCX files, we'll need to implement DOCX parsing later
