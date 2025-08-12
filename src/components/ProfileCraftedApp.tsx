@@ -317,22 +317,20 @@ export default function ProfileCraftedApp() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      {/* Header - Static Blue-Purple Gradient Banner */}
+      {/* Header - Soft Gray and Sage Green Gradient Banner */}
       <header style={{
         position: 'fixed',
         top: '0',
         left: '0',
         right: '0',
-        zIndex: '50',
-        background: 'linear-gradient(to right, #2563eb, #7c3aed)',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+        zIndex: '1000',
+        background: 'linear-gradient(135deg, #9ca3af 0%, #6b7280 25%, #10b981 75%, #059669 100%)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+        backdropFilter: 'blur(10px)',
+        boxShadow: '0 4px 32px rgba(0, 0, 0, 0.1)',
+        padding: '24px 32px',
+        textAlign: 'center'
       }}>
-        <div style={{ 
-          maxWidth: '1280px', 
-          margin: '0 auto', 
-          padding: '24px 32px',
-          textAlign: 'center'
-        }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h1 style={{
@@ -436,7 +434,6 @@ export default function ProfileCraftedApp() {
               </a>
             </nav>
           </div>
-        </div>
       </header>
 
       {/* Main Content - Foundation: 1280px Centered Container with Fixed Header Padding */}

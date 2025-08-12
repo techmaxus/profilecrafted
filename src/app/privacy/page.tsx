@@ -107,13 +107,26 @@ export default function PrivacyPolicy() {
               </ul>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">2. How We Use Your Information</h2>
-              <ul className="list-disc pl-6 text-gray-700 space-y-2">
-                <li><strong>Resume Analysis:</strong> We send your resume text to OpenAI's API for AI-powered analysis and scoring</li>
-                <li><strong>File Storage:</strong> Resume files are temporarily stored on Cloudflare R2 for processing</li>
-                <li><strong>Service Improvement:</strong> We analyze usage patterns to improve our service</li>
-                <li><strong>Security:</strong> We monitor for abuse and ensure service reliability</li>
+            <section style={{ marginBottom: '32px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '16px',
+                borderBottom: '2px solid #667eea',
+                paddingBottom: '8px'
+              }}>2. How We Use Your Information</h2>
+              <ul style={{
+                listStyleType: 'disc',
+                paddingLeft: '24px',
+                color: '#4b5563',
+                fontSize: '16px',
+                lineHeight: '1.6'
+              }}>
+                <li style={{ marginBottom: '8px' }}><strong>Resume Analysis:</strong> We send your resume text to OpenAI's API for AI-powered analysis and scoring</li>
+                <li style={{ marginBottom: '8px' }}><strong>File Storage:</strong> Resume files are stored securely on Cloudflare R2 cloud storage for processing and temporary retention</li>
+                <li style={{ marginBottom: '8px' }}><strong>Service Improvement:</strong> We analyze usage patterns to improve our service</li>
+                <li style={{ marginBottom: '8px' }}><strong>Security:</strong> We monitor for abuse and ensure service reliability</li>
               </ul>
             </section>
 
@@ -129,22 +142,49 @@ export default function PrivacyPolicy() {
               </ul>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">4. Data Security</h2>
-              <ul className="list-disc pl-6 text-gray-700 space-y-2">
-                <li>All data transmission is encrypted using HTTPS/TLS</li>
-                <li>Resume files are automatically deleted after processing</li>
-                <li>We implement rate limiting and security monitoring</li>
-                <li>Access to your data is restricted to essential processing only</li>
+            <section style={{ marginBottom: '32px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '16px',
+                borderBottom: '2px solid #667eea',
+                paddingBottom: '8px'
+              }}>4. Data Security</h2>
+              <ul style={{
+                listStyleType: 'disc',
+                paddingLeft: '24px',
+                color: '#4b5563',
+                fontSize: '16px',
+                lineHeight: '1.6'
+              }}>
+                <li style={{ marginBottom: '8px' }}>All data transmission is encrypted using HTTPS/TLS</li>
+                <li style={{ marginBottom: '8px' }}>Resume files are stored securely in Cloudflare R2 with enterprise-grade encryption</li>
+                <li style={{ marginBottom: '8px' }}>We implement rate limiting and security monitoring</li>
+                <li style={{ marginBottom: '8px' }}>Access to your data is restricted to essential processing only</li>
               </ul>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">5. Data Retention</h2>
-              <ul className="list-disc pl-6 text-gray-700 space-y-2">
-                <li><strong>Resume Files:</strong> Deleted immediately after text extraction</li>
-                <li><strong>Analysis Results:</strong> Stored temporarily in your browser session only</li>
-                <li><strong>Usage Analytics:</strong> Aggregated and anonymized data may be retained for service improvement</li>
+            <section style={{ marginBottom: '32px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '16px',
+                borderBottom: '2px solid #667eea',
+                paddingBottom: '8px'
+              }}>5. Data Retention</h2>
+              <ul style={{
+                listStyleType: 'disc',
+                paddingLeft: '24px',
+                color: '#4b5563',
+                fontSize: '16px',
+                lineHeight: '1.6'
+              }}>
+                <li style={{ marginBottom: '8px' }}><strong>Resume Files:</strong> Stored securely on Cloudflare R2 for up to 30 days to enable re-analysis and service functionality, then automatically deleted</li>
+                <li style={{ marginBottom: '8px' }}><strong>Extracted Text:</strong> Processed and stored temporarily during your session for analysis purposes</li>
+                <li style={{ marginBottom: '8px' }}><strong>Analysis Results:</strong> May be cached temporarily to improve service performance</li>
+                <li style={{ marginBottom: '8px' }}><strong>Usage Analytics:</strong> Aggregated and anonymized data may be retained for service improvement</li>
               </ul>
             </section>
 

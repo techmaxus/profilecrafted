@@ -213,7 +213,7 @@ export default function About() {
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Privacy & Security</h2>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <ul className="text-gray-700 space-y-2">
-                  <li>✅ <strong>Secure Processing:</strong> All files are processed securely and deleted after analysis</li>
+                  <li>✅ <strong>Secure Processing:</strong> All files are processed securely and stored on Cloudflare R2 with enterprise-grade encryption for up to 30 days, then automatically deleted</li>
                   <li>✅ <strong>No Data Storage:</strong> We don't permanently store your resume content</li>
                   <li>✅ <strong>HTTPS Encryption:</strong> All data transmission is encrypted</li>
                   <li>✅ <strong>Rate Limiting:</strong> Protection against abuse and overuse</li>

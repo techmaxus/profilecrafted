@@ -39,6 +39,53 @@ export default function EssayEditor({
   return (
     <div className="w-full max-w-5xl mx-auto animate-fade-in">
       <div className="text-center mb-12">
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '16px',
+          marginBottom: '16px'
+        }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '24px',
+            boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
+          }}>
+            ✍️
+          </div>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '24px',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+          }}>
+            🎯
+          </div>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '24px',
+            boxShadow: '0 4px 12px rgba(245, 158, 11, 0.3)'
+          }}>
+            📝
+          </div>
+        </div>
         <h2 className="text-4xl font-semibold text-ui-text mb-3">Your APM Essay</h2>
         <p className="text-ui-text-secondary text-lg">Edit and perfect your application essay</p>
       </div>

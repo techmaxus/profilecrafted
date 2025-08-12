@@ -168,7 +168,7 @@ export default function Contact() {
                     Is my resume data secure?
                   </h3>
                   <p className="text-gray-700 text-sm">
-                    Yes! Your resume files are processed securely and automatically deleted after analysis. 
+                    Yes! Your resume files are processed securely and stored on Cloudflare R2 with enterprise-grade encryption for up to 30 days to enable re-analysis, then automatically deleted. 
                     We don't store your resume content permanently. See our{' '}
                     <Link href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</Link>{' '}
                     for full details.
