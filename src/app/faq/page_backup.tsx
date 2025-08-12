@@ -68,6 +68,7 @@ export default function FAQ() {
       background: 'linear-gradient(135deg, #9ca3af 0%, #6b7280 25%, #10b981 75%, #059669 100%)',
       padding: '0'
     }}>
+      {/* Header */}
       <header style={{
         background: 'rgba(255, 255, 255, 0.1)',
         backdropFilter: 'blur(10px)',
@@ -103,6 +104,7 @@ export default function FAQ() {
         </div>
       </header>
 
+      {/* Main Content */}
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
