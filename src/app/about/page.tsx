@@ -159,47 +159,117 @@ export default function About() {
               </div>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">APM Evaluation Framework</h2>
-              <p className="text-gray-700 mb-4">
+            <section style={{ marginBottom: '56px' }}>
+              <h2 style={{
+                fontSize: '32px',
+                fontWeight: '700',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center',
+                borderBottom: '3px solid #10b981',
+                paddingBottom: '12px'
+              }}>APM Evaluation Framework</h2>
+              <p style={{
+                color: '#4b5563',
+                fontSize: '18px',
+                lineHeight: '1.7',
+                marginBottom: '40px',
+                textAlign: 'center',
+                maxWidth: '700px',
+                margin: '0 auto 40px auto'
+              }}>
                 Our AI analyzes your resume across five critical competencies for APM success:
               </p>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium mr-3 mt-0.5">
-                    Technical Fluency
-                  </span>
-                  <span className="text-gray-700">Programming skills, data analysis, and technical aptitude</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium mr-3 mt-0.5">
-                    Product Thinking
-                  </span>
-                  <span className="text-gray-700">User focus, market understanding, and product strategy</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm font-medium mr-3 mt-0.5">
-                    Curiosity & Creativity
-                  </span>
-                  <span className="text-gray-700">Innovation, problem-solving, and learning mindset</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded text-sm font-medium mr-3 mt-0.5">
-                    Communication
-                  </span>
-                  <span className="text-gray-700">Written/verbal skills and stakeholder management</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="bg-pink-100 text-pink-800 px-2 py-1 rounded text-sm font-medium mr-3 mt-0.5">
-                    Leadership
-                  </span>
-                  <span className="text-gray-700">Team leadership, project management, and influence</span>
-                </li>
-              </ul>
+              
+              <h3 style={{
+                fontSize: '24px',
+                fontWeight: '600',
+                color: '#059669',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Core Competencies</h3>
+              
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                gap: '20px',
+                marginBottom: '32px'
+              }}>
+                <div style={{
+                  background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '2px solid #3b82f6',
+                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.15)'
+                }}>
+                  <h4 style={{ fontWeight: '700', color: '#1e40af', marginBottom: '12px', fontSize: '18px' }}>💻 Technical Fluency</h4>
+                  <p style={{ color: '#1e40af', fontSize: '15px', lineHeight: '1.6' }}>
+                    Programming skills, data analysis, and technical aptitude
+                  </p>
+                </div>
+                
+                <div style={{
+                  background: 'linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '2px solid #10b981',
+                  boxShadow: '0 4px 12px rgba(16, 185, 129, 0.15)'
+                }}>
+                  <h4 style={{ fontWeight: '700', color: '#059669', marginBottom: '12px', fontSize: '18px' }}>🎯 Product Thinking</h4>
+                  <p style={{ color: '#059669', fontSize: '15px', lineHeight: '1.6' }}>
+                    User focus, market understanding, and product strategy
+                  </p>
+                </div>
+                
+                <div style={{
+                  background: 'linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '2px solid #8b5cf6',
+                  boxShadow: '0 4px 12px rgba(139, 92, 246, 0.15)'
+                }}>
+                  <h4 style={{ fontWeight: '700', color: '#7c3aed', marginBottom: '12px', fontSize: '18px' }}>🧠 Curiosity & Creativity</h4>
+                  <p style={{ color: '#7c3aed', fontSize: '15px', lineHeight: '1.6' }}>
+                    Innovation, problem-solving, and learning mindset
+                  </p>
+                </div>
+                
+                <div style={{
+                  background: 'linear-gradient(135deg, #fed7aa 0%, #fdba74 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '2px solid #f97316',
+                  boxShadow: '0 4px 12px rgba(249, 115, 22, 0.15)'
+                }}>
+                  <h4 style={{ fontWeight: '700', color: '#ea580c', marginBottom: '12px', fontSize: '18px' }}>💬 Communication</h4>
+                  <p style={{ color: '#ea580c', fontSize: '15px', lineHeight: '1.6' }}>
+                    Written/verbal skills and stakeholder management
+                  </p>
+                </div>
+                
+                <div style={{
+                  background: 'linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '2px solid #ec4899',
+                  boxShadow: '0 4px 12px rgba(236, 72, 153, 0.15)'
+                }}>
+                  <h4 style={{ fontWeight: '700', color: '#be185d', marginBottom: '12px', fontSize: '18px' }}>👑 Leadership</h4>
+                  <p style={{ color: '#be185d', fontSize: '15px', lineHeight: '1.6' }}>
+                    Team leadership, project management, and influence
+                  </p>
+                </div>
+              </div>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Technology Stack</h2>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Technology Stack</h2>
               <p className="text-gray-700 mb-4">
                 ProfileCrafted is built with modern, secure technologies:
               </p>
@@ -258,9 +328,9 @@ export default function About() {
                 Questions, feedback, or need help? We're here to assist:
               </p>
               <ul className="text-gray-700 space-y-2">
-                <li>📧 <strong>General Support:</strong> <a href="mailto:support@profilecrafted.com" className="text-blue-600 hover:underline">support@profilecrafted.com</a></li>
-                <li>🔒 <strong>Privacy Questions:</strong> <a href="mailto:privacy@profilecrafted.com" className="text-blue-600 hover:underline">privacy@profilecrafted.com</a></li>
-                <li>⚖️ <strong>Legal Matters:</strong> <a href="mailto:legal@profilecrafted.com" className="text-blue-600 hover:underline">legal@profilecrafted.com</a></li>
+                <li>📧 <strong>General Support:</strong> <a href="mailto:profilecrafted@gmail.com" className="text-blue-600 hover:underline">profilecrafted@gmail.com</a></li>
+                <li>🔒 <strong>Privacy Questions:</strong> <a href="mailto:profilecrafted@gmail.com" className="text-blue-600 hover:underline">profilecrafted@gmail.com</a></li>
+                <li>⚖️ <strong>Legal Matters:</strong> <a href="mailto:profilecrafted@gmail.com" className="text-blue-600 hover:underline">profilecrafted@gmail.com</a></li>
               </ul>
             </section>
           </div>

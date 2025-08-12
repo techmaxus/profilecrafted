@@ -203,8 +203,8 @@ export default function PrivacyPolicy() {
               <h2 className="text-xl font-semibold text-gray-900 mb-4">7. Contact Information</h2>
               <p className="text-gray-700">
                 For privacy-related questions or concerns, please contact us at:{' '}
-                <a href="mailto:privacy@profilecrafted.com" className="text-blue-600 hover:underline">
-                  privacy@profilecrafted.com
+                <a href="mailto:profilecrafted@gmail.com" className="text-blue-600 hover:underline">
+                  profilecrafted@gmail.com
                 </a>
               </p>
             </section>

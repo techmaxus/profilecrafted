@@ -52,7 +52,7 @@ export default function Contact() {
         <div style={{
           background: 'rgba(255, 255, 255, 0.95)',
           borderRadius: '20px',
-          padding: '48px',
+          padding: '40px 32px',
           boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
           backdropFilter: 'blur(10px)'
         }}>
@@ -62,22 +62,47 @@ export default function Contact() {
             background: 'linear-gradient(135deg, #6b7280 0%, #10b981 50%, #059669 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            marginBottom: '32px',
+            marginBottom: '40px',
             textAlign: 'center'
           }}>Contact & Support</h1>
           
           <div className="prose prose-gray max-w-none">
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Get in Touch</h2>
-              <p className="text-gray-700 mb-6">
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '20px',
+                textAlign: 'center'
+              }}>Get in Touch</h2>
+              <p style={{
+                color: '#4b5563',
+                fontSize: '16px',
+                lineHeight: '1.7',
+                marginBottom: '32px',
+                textAlign: 'center',
+                maxWidth: '600px',
+                margin: '0 auto 32px auto'
+              }}>
                 We're here to help you make the most of ProfileCrafted. Whether you have questions, 
                 feedback, or need technical support, we'd love to hear from you.
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Support Channels</h2>
-              <div className="grid md:grid-cols-2 gap-6">
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '32px',
+                textAlign: 'center'
+              }}>Support Channels</h2>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: '24px',
+                marginBottom: '24px'
+              }}>
                 <div className="bg-blue-50 p-6 rounded-lg">
                   <h3 className="font-semibold text-blue-900 mb-3 flex items-center">
                     📧 Email Support
@@ -86,10 +111,10 @@ export default function Contact() {
                     For general questions, technical issues, or feedback
                   </p>
                   <a 
-                    href="mailto:support@profilecrafted.com" 
+                    href="mailto:profilecrafted@gmail.com" 
                     className="text-blue-600 hover:text-blue-700 font-medium"
                   >
-                    support@profilecrafted.com
+                    profilecrafted@gmail.com
                   </a>
                   <p className="text-blue-700 text-xs mt-2">
                     Response time: Within 24 hours
@@ -104,10 +129,10 @@ export default function Contact() {
                     For privacy concerns or data-related questions
                   </p>
                   <a 
-                    href="mailto:privacy@profilecrafted.com" 
+                    href="mailto:profilecrafted@gmail.com" 
                     className="text-green-600 hover:text-green-700 font-medium"
                   >
-                    privacy@profilecrafted.com
+                    profilecrafted@gmail.com
                   </a>
                   <p className="text-green-700 text-xs mt-2">
                     Response time: Within 48 hours
@@ -122,10 +147,10 @@ export default function Contact() {
                     For legal matters, partnerships, or business inquiries
                   </p>
                   <a 
-                    href="mailto:legal@profilecrafted.com" 
+                    href="mailto:profilecrafted@gmail.com" 
                     className="text-purple-600 hover:text-purple-700 font-medium"
                   >
-                    legal@profilecrafted.com
+                    profilecrafted@gmail.com
                   </a>
                   <p className="text-purple-700 text-xs mt-2">
                     Response time: Within 72 hours
@@ -140,10 +165,10 @@ export default function Contact() {
                     Ideas for new features or improvements
                   </p>
                   <a 
-                    href="mailto:feedback@profilecrafted.com" 
+                    href="mailto:profilecrafted@gmail.com" 
                     className="text-orange-600 hover:text-orange-700 font-medium"
                   >
-                    feedback@profilecrafted.com
+                    profilecrafted@gmail.com
                   </a>
                   <p className="text-orange-700 text-xs mt-2">
                     We read every suggestion!
