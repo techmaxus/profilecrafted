@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import * as pdfParse from 'pdf-parse';
+
+// Dynamic import to avoid build-time issues
+const getPdfParse = async () => {
+  const pdfParse = await import('pdf-parse');
+  return pdfParse.default;
+};
 
 // CORS headers
 const corsHeaders = {
@@ -63,7 +68,8 @@ export async function POST(request: NextRequest) {
     
     // Parse PDF using pdf-parse
     console.log('🔍 Extracting text from PDF...');
-    const pdfData = await pdfParse.default(buffer, {
+    const pdfParseFunc = await getPdfParse();
+    const pdfData = await pdfParseFunc(buffer, {
       // PDF parsing options for better text extraction
       max: 0, // Parse all pages
       version: 'v1.10.100' // Use stable version
