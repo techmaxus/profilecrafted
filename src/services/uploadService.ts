@@ -52,7 +52,7 @@ class UploadService {
       formData.append('userId', this.generateUserId());
 
       // Create XMLHttpRequest for progress tracking
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const xhr = new XMLHttpRequest();
 
         // Track upload progress
@@ -81,7 +81,7 @@ class UploadService {
                 error: response.error || 'Upload failed'
               });
             }
-          } catch (error) {
+          } catch {
             resolve({
               success: false,
               error: 'Invalid response from server'

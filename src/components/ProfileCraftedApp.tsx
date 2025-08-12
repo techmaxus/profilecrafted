@@ -226,7 +226,7 @@ export default function ProfileCraftedApp() {
     { id: 'export', label: 'Export & Share', icon: '🚀' },
   ];
 
-  const currentStepIndex = steps.findIndex(step => step.id === appState.currentStep);
+  // const currentStepIndex = steps.findIndex(step => step.id === appState.currentStep);
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">

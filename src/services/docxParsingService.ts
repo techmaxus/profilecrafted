@@ -11,7 +11,7 @@ interface DocxParseResult {
     textLength: number;
     parsingMethod: string;
     wordCount?: number;
-    messages?: any[];
+    messages?: unknown[];
   };
 }
 

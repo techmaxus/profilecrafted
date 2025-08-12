@@ -46,7 +46,7 @@ export default function ScoreCard({ scores, onGenerateEssay, isGenerating }: Sco
         animateScore(category.key, score);
       }, index * 200); // 200ms stagger between categories
     });
-  }, [scores]);
+  }, [scores, categories]);
 
   return (
     <div className="w-full max-w-6xl mx-auto animate-fade-in">
@@ -133,7 +133,7 @@ export default function ScoreCard({ scores, onGenerateEssay, isGenerating }: Sco
           justifyContent: 'center'
         }}
       >
-        {categories.map((category, index) => {
+        {categories.map((category) => {
           const score = animatedScores[category.key] || 0;
           const tip = scores.tips[category.key as keyof typeof scores.tips] || 'Keep improving your skills in this area.';
           
