@@ -27,35 +27,56 @@ export default function ProfileCraftedApp() {
       console.log('✅ File uploaded successfully:', uploadResponse);
       
       // Step 2: Extract text from uploaded file and analyze
-      const fileReader = new FileReader();
-      fileReader.onload = async (e) => {
-        try {
-          const resumeText = e.target?.result as string;
-          console.log('📄 Analyzing resume text, length:', resumeText?.length);
-          
-          // Step 3: Call analysis API
-          const analysisResponse = await api.analyzeResume(resumeText, uploadResponse.key);
-          console.log('🎯 Analysis completed:', analysisResponse);
-          
-          setAppState(prev => ({
-            ...prev,
-            isLoading: false,
-            scores: analysisResponse.analysis,
-            sessionId: uploadResponse.key, // Use file key as session ID
-            currentStep: 'analysis',
-          }));
-        } catch (analysisError) {
-          console.error('❌ Analysis failed:', analysisError);
-          setAppState(prev => ({
-            ...prev,
-            isLoading: false,
-            error: analysisError instanceof APIError ? analysisError.message : 'Analysis failed',
-          }));
+      try {
+        let resumeText: string;
+        
+        if (file.type === 'application/pdf') {
+          // Extract text from PDF using pdf-parse
+          const arrayBuffer = await file.arrayBuffer();
+          const pdfParse = await import('pdf-parse');
+          const pdfData = await pdfParse.default(Buffer.from(arrayBuffer));
+          resumeText = pdfData.text;
+          console.log('📄 PDF text extracted, length:', resumeText?.length);
+        } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+          // For DOCX files, we'll need to implement DOCX parsing later
+          // For now, show an informative error
+          throw new Error('DOCX parsing not yet implemented. Please use PDF files for now.');
+        } else {
+          // Fallback for other text-based files
+          const fileReader = new FileReader();
+          resumeText = await new Promise((resolve, reject) => {
+            fileReader.onload = (e) => resolve(e.target?.result as string);
+            fileReader.onerror = reject;
+            fileReader.readAsText(file);
+          });
         }
-      };
-      
-      // Read file as text for analysis
-      fileReader.readAsText(file);
+        
+        // Validate extracted text
+        if (!resumeText || resumeText.trim().length < 50) {
+          throw new Error('Could not extract sufficient text from the file. Please ensure the file contains readable text.');
+        }
+        
+        console.log('📄 Analyzing resume text, length:', resumeText?.length);
+        
+        // Step 3: Call analysis API
+        const analysisResponse = await api.analyzeResume(resumeText, uploadResponse.key);
+        console.log('🎯 Analysis completed:', analysisResponse);
+        
+        setAppState(prev => ({
+          ...prev,
+          isLoading: false,
+          scores: analysisResponse.analysis,
+          sessionId: uploadResponse.key, // Use file key as session ID
+          currentStep: 'analysis',
+        }));
+      } catch (analysisError) {
+        console.error('❌ Analysis failed:', analysisError);
+        setAppState(prev => ({
+          ...prev,
+          isLoading: false,
+          error: analysisError instanceof APIError ? analysisError.message : 'Analysis failed',
+        }));
+      }
       
     } catch (error) {
       console.error('❌ Upload failed:', error);

@@ -12,10 +12,12 @@
     "@aws-sdk/client-s3": "^3.864.0",
     "@aws-sdk/s3-request-presigner": "^3.490.0",
     "@types/nodemailer": "^6.4.17",
+    "@types/pdf-parse": "^1.1.5",
     "dotenv": "^17.2.1",
     "next": "15.4.6",
     "nodemailer": "^7.0.5",
     "openai": "^4.24.1",
+    "pdf-parse": "^1.1.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-dropzone": "^14.3.8"
