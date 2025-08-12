@@ -278,7 +278,11 @@ export default function ProfileCraftedApp() {
 
   const renderProgressBar = () => {
     const currentIndex = getCurrentStepIndex();
-    if (currentIndex === -1) return null;
+    // Only show progress bar during upload and analysis phases
+    // Don't show when navigating between completed steps (essay, export)
+    if (currentIndex === -1 || appState.currentStep === 'essay' || appState.currentStep === 'export') {
+      return null;
+    }
 
     return (
       <div style={{
@@ -487,7 +491,7 @@ export default function ProfileCraftedApp() {
       <main style={{ 
         maxWidth: '1280px', 
         margin: '0 auto', 
-        padding: '140px 32px 48px 32px' 
+        padding: '180px 32px 48px 32px' 
       }}>
         {renderProgressBar()}
         {renderCurrentStep()}
