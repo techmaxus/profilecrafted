@@ -7,11 +7,9 @@ const parsePdfProduction = async (buffer: Buffer): Promise<{ text: string; numpa
   // Strategy 1: Try pdf-parse with error handling
   try {
     console.log('📦 Attempting pdf-parse strategy...');
-    const pdfParse = require('pdf-parse');
+    const pdfParse = (await import('pdf-parse')).default;
     const result = await pdfParse(buffer, {
-      max: 0, // Parse all pages
-      normalizeWhitespace: true,
-      disableCombineTextItems: false
+      max: 0 // Parse all pages
     });
     
     if (result.text && result.text.trim().length > 50) {
