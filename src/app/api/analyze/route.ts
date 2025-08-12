@@ -133,7 +133,7 @@ Format your response as JSON with this structure:
         },
         {
           role: 'user',
-          content: analysisPrompt
+          content: prompt
         }
       ],
       temperature: 0.3,
