@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { AppState } from '@/types';
 import { api, APIError } from '@/lib/api';
-import FileUpload from '@/components/FileUpload';
-import ScoreCard from '@/components/ScoreCard';
-import EssayEditor from '@/components/EssayEditor';
+import FileUpload from './FileUpload';
+import ScoreCard from './ScoreCard';
+import Footer from './Footer';
+import EssayEditor from './EssayEditor';
 import ExportPage from '@/components/ExportPage';
 
 export default function ProfileCraftedApp() {
@@ -247,23 +248,73 @@ export default function ProfileCraftedApp() {
           padding: '24px 32px',
           textAlign: 'center'
         }}>
-          <h1 style={{
-            fontSize: '36px',
-            fontWeight: '600',
-            color: 'white',
-            marginBottom: '8px',
-            margin: '0 0 8px 0'
-          }}>
-            ProfileCrafted<span style={{ opacity: '0.9' }}>.com</span>
-          </h1>
-          <p style={{
-            color: 'rgba(255, 255, 255, 0.9)',
-            fontSize: '18px',
-            fontWeight: '500',
-            margin: '0'
-          }}>
-            Your intelligent partner for APM application success
-          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <h1 style={{
+                fontSize: '36px',
+                fontWeight: '600',
+                color: 'white',
+                marginBottom: '8px',
+                margin: '0 0 8px 0'
+              }}>
+                ProfileCrafted<span style={{ opacity: '0.9' }}>.com</span>
+              </h1>
+              <p style={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                fontSize: '18px',
+                fontWeight: '500',
+                margin: '0'
+              }}>
+                Your intelligent partner for APM application success
+              </p>
+            </div>
+            
+            {/* Navigation Links */}
+            <nav style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+              <a 
+                href="/about" 
+                style={{ 
+                  color: 'rgba(255, 255, 255, 0.9)', 
+                  textDecoration: 'none', 
+                  fontSize: '16px',
+                  fontWeight: '500',
+                  transition: 'color 0.2s'
+                }}
+                onMouseOver={(e) => e.target.style.color = 'white'}
+                onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.9)'}
+              >
+                About
+              </a>
+              <a 
+                href="/faq" 
+                style={{ 
+                  color: 'rgba(255, 255, 255, 0.9)', 
+                  textDecoration: 'none', 
+                  fontSize: '16px',
+                  fontWeight: '500',
+                  transition: 'color 0.2s'
+                }}
+                onMouseOver={(e) => e.target.style.color = 'white'}
+                onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.9)'}
+              >
+                FAQ
+              </a>
+              <a 
+                href="/contact" 
+                style={{ 
+                  color: 'rgba(255, 255, 255, 0.9)', 
+                  textDecoration: 'none', 
+                  fontSize: '16px',
+                  fontWeight: '500',
+                  transition: 'color 0.2s'
+                }}
+                onMouseOver={(e) => e.target.style.color = 'white'}
+                onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.9)'}
+              >
+                Support
+              </a>
+            </nav>
+          </div>
         </div>
       </header>
 
@@ -276,25 +327,8 @@ export default function ProfileCraftedApp() {
         {renderCurrentStep()}
       </main>
 
-      {/* Footer - Foundation: 1280px Centered Container */}
-      <footer className="bg-white border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-8 py-8 text-center">
-          <p className="text-gray-600 font-medium">
-            Built for aspiring APMs • Powered by AI
-          </p>
-          <p className="text-gray-500 text-sm mt-2">
-            Vibe coded by{' '}
-            <a 
-              href="https://www.linkedin.com/in/techmaxus/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium"
-            >
-              Lakshay Kapoor
-            </a>
-          </p>
-        </div>
-      </footer>
+      {/* Footer with comprehensive navigation links */}
+      <Footer />
     </div>
   );
 }
