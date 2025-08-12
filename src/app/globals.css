@@ -192,6 +192,65 @@ a {
   text-decoration: none;
 }
 
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 24px !important;
+  }
+  
+  .header-tagline {
+    font-size: 12px !important;
+    padding: 0 4px !important;
+  }
+  
+  .nav-button {
+    font-size: 12px !important;
+    padding: 5px 8px !important;
+  }
+  
+  .main-content {
+    padding: 200px 16px 32px 16px !important;
+  }
+  
+  .card-container {
+    margin: 0 8px !important;
+    padding: 16px !important;
+  }
+  
+  .progress-container {
+    padding: 16px !important;
+    margin: 0 0 24px 0 !important;
+  }
+  
+  .step-icon {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 16px !important;
+  }
+  
+  .step-label {
+    font-size: 10px !important;
+  }
+  
+  .step-description {
+    font-size: 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 22px !important;
+  }
+  
+  .header-tagline {
+    font-size: 11px !important;
+  }
+  
+  .main-content {
+    padding: 200px 12px 24px 12px !important;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

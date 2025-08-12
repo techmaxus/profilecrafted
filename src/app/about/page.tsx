@@ -17,10 +17,12 @@ export default function About() {
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 32px',
+          padding: '0 16px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px'
         }}>
           <Link 
             href="/" 
@@ -33,7 +35,7 @@ export default function About() {
           >
             ProfileCrafted
           </Link>
-          <nav style={{ display: 'flex', gap: '24px' }}>
+          <nav style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <Link href="/" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>Home</Link>
             <Link href="/faq" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>FAQ</Link>
             <Link href="/contact" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>Support</Link>
@@ -45,7 +47,7 @@ export default function About() {
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        padding: '48px 32px'
+        padding: '32px 16px'
       }}>
         <div style={{
           background: 'rgba(255, 255, 255, 0.95)',

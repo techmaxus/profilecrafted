@@ -285,7 +285,7 @@ export default function ProfileCraftedApp() {
     }
 
     return (
-      <div style={{
+      <div className="progress-container" style={{
         background: 'rgba(255, 255, 255, 0.95)',
         borderRadius: '16px',
         padding: '24px',
@@ -313,7 +313,7 @@ export default function ProfileCraftedApp() {
                 transition: 'opacity 0.3s ease'
               }}
             >
-              <div style={{
+              <div className="step-icon" style={{
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
@@ -332,7 +332,7 @@ export default function ProfileCraftedApp() {
               }}>
                 {step.icon}
               </div>
-              <div style={{
+              <div className="step-label" style={{
                 fontSize: '12px',
                 fontWeight: '600',
                 color: index <= currentIndex ? '#1f2937' : '#9ca3af',
@@ -341,7 +341,7 @@ export default function ProfileCraftedApp() {
               }}>
                 {step.label}
               </div>
-              <div style={{
+              <div className="step-description" style={{
                 fontSize: '10px',
                 color: index <= currentIndex ? '#6b7280' : '#d1d5db',
                 textAlign: 'center',
@@ -373,7 +373,7 @@ export default function ProfileCraftedApp() {
         borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
         backdropFilter: 'blur(10px)',
         boxShadow: '0 4px 32px rgba(0, 0, 0, 0.1)',
-        padding: '24px 32px',
+        padding: '20px 16px',
         textAlign: 'center'
       }}>
           <div style={{ 
@@ -383,21 +383,24 @@ export default function ProfileCraftedApp() {
             textAlign: 'center'
           }}>
             {/* Logo and Tagline */}
-            <div style={{ marginBottom: '20px' }}>
-              <h1 style={{
-                fontSize: '36px',
+            <div style={{ marginBottom: '16px' }}>
+              <h1 className="header-title" style={{
+                fontSize: '28px',
                 fontWeight: '600',
                 color: 'white',
-                marginBottom: '8px',
-                margin: '0 0 8px 0'
+                marginBottom: '6px',
+                margin: '0 0 6px 0',
+                lineHeight: '1.2'
               }}>
                 ProfileCrafted<span style={{ opacity: '0.9' }}>.com</span>
               </h1>
-              <p style={{
+              <p className="header-tagline" style={{
                 color: 'rgba(255, 255, 255, 0.9)',
-                fontSize: '18px',
+                fontSize: '14px',
                 fontWeight: '500',
-                margin: '0'
+                margin: '0',
+                lineHeight: '1.4',
+                padding: '0 8px'
               }}>
                 Your intelligent partner for APM application success
               </p>
@@ -406,13 +409,15 @@ export default function ProfileCraftedApp() {
             {/* Navigation Links - Mobile Responsive */}
             <nav style={{ 
               display: 'flex', 
-              gap: '20px', 
+              gap: '12px', 
               alignItems: 'center',
               flexWrap: 'wrap',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              maxWidth: '100%'
             }}>
               <a 
                 href="/about" 
+                className="nav-button"
                 style={{ 
                   color: 'rgba(255, 255, 255, 0.9)', 
                   textDecoration: 'none', 
@@ -437,6 +442,7 @@ export default function ProfileCraftedApp() {
               </a>
               <a 
                 href="/faq" 
+                className="nav-button"
                 style={{ 
                   color: 'rgba(255, 255, 255, 0.9)', 
                   textDecoration: 'none', 
@@ -461,6 +467,7 @@ export default function ProfileCraftedApp() {
               </a>
               <a 
                 href="/contact" 
+                className="nav-button"
                 style={{ 
                   color: 'rgba(255, 255, 255, 0.9)', 
                   textDecoration: 'none', 
@@ -488,7 +495,7 @@ export default function ProfileCraftedApp() {
       </header>
 
       {/* Main Content - Foundation: 1280px Centered Container with Fixed Header Padding */}
-      <main style={{ 
+      <main className="main-content" style={{ 
         maxWidth: '1280px', 
         margin: '0 auto', 
         padding: '220px 32px 48px 32px' 
