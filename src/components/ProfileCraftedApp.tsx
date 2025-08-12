@@ -35,8 +35,10 @@ export default function ProfileCraftedApp() {
           const arrayBuffer = await file.arrayBuffer();
           const pdfjsLib = await import('pdfjs-dist');
           
-          // Disable worker for simpler, more reliable setup
-          pdfjsLib.GlobalWorkerOptions.workerSrc = '';
+          // Configure PDF.js worker - use a reliable CDN source
+          if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          }
           
           const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
           let fullText = '';
