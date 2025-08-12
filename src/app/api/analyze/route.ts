@@ -60,28 +60,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // APM-focused analysis prompt
+    // APM-focused analysis prompt with optimized scoring
     const prompt = `
 You are an expert APM recruiter analyzing resumes for Associate Product Manager positions at top tech companies.
 
-IMPORTANT: If the resume text appears garbled, corrupted, or unreadable, please do your best to extract any meaningful information and provide reasonable scores based on what you can understand. Do not return all 0 scores unless the text is completely empty.
+IMPORTANT SCORING GUIDELINES:
+- Even if the resume text appears garbled or has extraction artifacts, focus on extracting meaningful information
+- Look for key indicators: email, contact info, education, skills, experience keywords
+- Provide constructive scores between 60-100 (entry-level to excellent) rather than penalizing for text extraction issues
+- Score based on potential and visible qualifications, not text formatting quality
+- Remember this is for Associate PM roles (entry-level), so adjust expectations accordingly
 
 Analyze this resume and provide a comprehensive APM fit assessment:
 
 ${resumeText}
 
-Evaluate the candidate across these 5 key dimensions:
-${resumeText}
-
 Please analyze this resume for APM roles and provide:
 
-1. OVERALL APM FIT SCORE (0-100): Overall suitability for APM roles
-2. CATEGORY SCORES (0-100 each):
-   - Technical Skills: Programming, data analysis, technical aptitude
-   - Product Sense: Product thinking, user focus, market understanding
-   - Leadership: Team leadership, project management, influence
-   - Analytics: Data-driven decision making, metrics, experimentation
-   - Communication: Written/verbal communication, stakeholder management
+1. OVERALL APM FIT SCORE (60-100): Overall suitability for APM roles
+   - 60-70: Entry-level candidate with basic qualifications
+   - 70-80: Good candidate with relevant skills/experience
+   - 80-90: Strong candidate with solid APM potential
+   - 90-100: Exceptional candidate, ideal for top-tier APM roles
+
+2. CATEGORY SCORES (60-100 each):
+   - Technical Skills (60-100): Programming, data analysis, technical aptitude
+   - Product Sense (60-100): Product thinking, user focus, market understanding
+   - Leadership (60-100): Team leadership, project management, influence
+   - Analytics (60-100): Data-driven decision making, metrics, experimentation
+   - Communication (60-100): Written/verbal communication, stakeholder management
+
+SCORING PHILOSOPHY: Focus on potential and growth mindset for Associate PM roles. Even candidates with limited experience should score 60+ if they show basic qualifications and learning ability.
 
 3. DETAILED FEEDBACK:
    - Top 3 strengths for APM roles

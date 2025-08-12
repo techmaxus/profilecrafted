@@ -1,5 +1,70 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Advanced text cleaning function to improve PDF extraction quality
+const cleanExtractedText = (text: string): string => {
+  console.log('🧹 Cleaning extracted text...');
+  
+  let cleaned = text;
+  
+  // Remove common PDF artifacts and garbled characters
+  cleaned = cleaned
+    // Remove PDF metadata and technical strings
+    .replace(/D:\d{14}Z/g, '') // Remove date stamps like D:20250706155736Z
+    .replace(/Apache FOP Version [\d.]+/g, '') // Remove Apache FOP version info
+    .replace(/Resume LinkedIn Resume generated from profile/g, 'Resume') // Clean LinkedIn header
+    .replace(/mailto:/g, '') // Clean email prefixes
+    .replace(/https?:\/\/[^\s]+/g, (url) => {
+      // Clean up URLs but keep readable parts
+      if (url.includes('linkedin.com')) return 'LinkedIn Profile';
+      if (url.includes('github.com')) return 'GitHub Profile';
+      return url.split('/').pop() || url;
+    })
+    
+    // Remove single characters and short meaningless sequences
+    .replace(/\b[A-Za-z]\b/g, ' ') // Remove single letters
+    .replace(/\b\d{1,2}\b/g, ' ') // Remove short numbers
+    .replace(/[!@#$%^&*()_+=\[\]{}|;':",./<>?`~]/g, ' ') // Remove special chars
+    
+    // Clean up garbled character sequences
+    .replace(/[^\w\s@.-]/g, ' ') // Keep only alphanumeric, spaces, @, ., -
+    .replace(/\b[A-Za-z0-9]{1,2}\b/g, ' ') // Remove very short words
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    
+    // Remove common PDF encoding artifacts
+    .replace(/\b(urn|3Ali|3A|lipi|jobid|3D)\b/gi, ' ') // Remove LinkedIn encoding artifacts
+    .replace(/\b[A-Z]{2,}\b/g, (match) => {
+      // Keep meaningful acronyms but remove random caps
+      const meaningful = ['PDF', 'API', 'UI', 'UX', 'CEO', 'CTO', 'MBA', 'PhD', 'USA', 'UK'];
+      return meaningful.includes(match) ? match : ' ';
+    })
+    
+    // Improve readability
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // Add spaces between camelCase
+    .replace(/(\d)([A-Za-z])/g, '$1 $2') // Add spaces between numbers and letters
+    .replace(/([A-Za-z])(\d)/g, '$1 $2') // Add spaces between letters and numbers
+    
+    // Final cleanup
+    .replace(/\s+/g, ' ') // Final whitespace normalization
+    .trim();
+  
+  // Extract and prioritize key information
+  const emailMatch = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+  const phoneMatch = text.match(/[\d\s\-\+\(\)]{10,}/);
+  const linkedinMatch = text.match(/linkedin\.com\/in\/[\w-]+/);
+  
+  // Reconstruct with key info first
+  let reconstructed = '';
+  if (emailMatch) reconstructed += `Email: ${emailMatch[0]} `;
+  if (phoneMatch) reconstructed += `Phone: ${phoneMatch[0].trim()} `;
+  if (linkedinMatch) reconstructed += `LinkedIn: ${linkedinMatch[0]} `;
+  
+  // Add cleaned main content
+  reconstructed += cleaned;
+  
+  console.log(`✅ Text cleaned: ${text.length} → ${reconstructed.length} characters`);
+  return reconstructed.trim();
+};
+
 // Production-ready PDF parsing with multiple strategies and fallbacks
 const parsePdfProduction = async (buffer: Buffer): Promise<{ text: string; numpages: number; info: Record<string, unknown> }> => {
   console.log('🔧 Starting production PDF parsing...');
@@ -215,7 +280,10 @@ export async function POST(request: NextRequest) {
     console.log('🔍 Extracting text from PDF...');
     const pdfData = await parsePdfProduction(buffer);
     
-    const extractedText = pdfData.text.trim();
+    let extractedText = pdfData.text.trim();
+    
+    // Advanced text cleaning and post-processing
+    extractedText = cleanExtractedText(extractedText);
     
     // Validate extracted text
     if (!extractedText || extractedText.length < 50) {
