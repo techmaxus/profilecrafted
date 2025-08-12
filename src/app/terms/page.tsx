@@ -51,7 +51,7 @@ export default function TermsOfService() {
         <div style={{
           background: 'rgba(255, 255, 255, 0.95)',
           borderRadius: '20px',
-          padding: '48px',
+          padding: '32px 24px',
           boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
           backdropFilter: 'blur(10px)'
         }}>
@@ -61,7 +61,7 @@ export default function TermsOfService() {
             background: 'linear-gradient(135deg, #6b7280 0%, #10b981 50%, #059669 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            marginBottom: '32px',
+            marginBottom: '24px',
             textAlign: 'center'
           }}>Terms of Service</h1>
           

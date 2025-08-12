@@ -1,6 +1,66 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function FAQ() {
+  const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({});
+
+  const toggleItem = (itemId: string) => {
+    setOpenItems(prev => ({
+      ...prev,
+      [itemId]: !prev[itemId]
+    }));
+  };
+
+  const FAQItem = ({ id, question, answer }: { id: string; question: string; answer: string }) => (
+    <div style={{
+      border: '1px solid rgba(0, 0, 0, 0.1)',
+      borderRadius: '12px',
+      overflow: 'hidden',
+      background: 'white',
+      marginBottom: '16px'
+    }}>
+      <button
+        onClick={() => toggleItem(id)}
+        style={{
+          width: '100%',
+          padding: '20px',
+          textAlign: 'left',
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: '16px',
+          fontWeight: '600',
+          color: '#1f2937'
+        }}
+      >
+        {question}
+        <span style={{
+          transform: openItems[id] ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.2s ease'
+        }}>▼</span>
+      </button>
+      {openItems[id] && (
+        <div style={{
+          padding: '0 20px 20px 20px',
+          borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+          background: '#f9fafb'
+        }}>
+          <p style={{
+            color: '#6b7280',
+            lineHeight: '1.6',
+            margin: '16px 0 0 0'
+          }}>
+            {answer}
+          </p>
+        </div>
+      )}
+    </div>
+  );
   return (
     <div style={{
       minHeight: '100vh',
@@ -66,45 +126,168 @@ export default function FAQ() {
             textAlign: 'center'
           }}>Frequently Asked Questions</h1>
           
-          <div className="prose prose-gray max-w-none">
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Getting Started</h2>
+          <div style={{ maxWidth: 'none' }}>
+            <div style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '24px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Getting Started</h2>
               
-              <div className="space-y-6">
-                <div className="border-l-4 border-blue-500 pl-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* FAQ Item 1 */}
+                <div style={{
+                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  background: 'white'
+                }}>
+                  <button
+                    onClick={() => toggleItem('formats')}
+                    style={{
+                      width: '100%',
+                      padding: '20px',
+                      textAlign: 'left',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#1f2937'
+                    }}
+                  >
                     What file formats can I upload?
-                  </h3>
-                  <p className="text-gray-700">
-                    ProfileCrafted supports PDF and DOCX (Microsoft Word) files up to 10MB in size. 
-                    We recommend PDF format for the most accurate text extraction and analysis.
-                  </p>
+                    <span style={{
+                      transform: openItems['formats'] ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s ease'
+                    }}>▼</span>
+                  </button>
+                  {openItems['formats'] && (
+                    <div style={{
+                      padding: '0 20px 20px 20px',
+                      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+                      background: '#f9fafb'
+                    }}>
+                      <p style={{
+                        color: '#6b7280',
+                        lineHeight: '1.6',
+                        margin: '16px 0 0 0'
+                      }}>
+                        ProfileCrafted supports PDF and DOCX (Microsoft Word) files up to 10MB in size. We recommend PDF format for the most accurate text extraction and analysis.
+                      </p>
+                    </div>
+                  )}
                 </div>
 
-                <div className="border-l-4 border-green-500 pl-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">
+                {/* FAQ Item 2 */}
+                <div style={{
+                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  background: 'white'
+                }}>
+                  <button
+                    onClick={() => toggleItem('time')}
+                    style={{
+                      width: '100%',
+                      padding: '20px',
+                      textAlign: 'left',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#1f2937'
+                    }}
+                  >
                     How long does the analysis take?
-                  </h3>
-                  <p className="text-gray-700">
-                    Most resume analyses complete within 30-60 seconds. The process includes file upload, 
-                    text extraction, AI analysis, and score calculation. Larger files may take slightly longer.
-                  </p>
+                    <span style={{
+                      transform: openItems['time'] ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s ease'
+                    }}>▼</span>
+                  </button>
+                  {openItems['time'] && (
+                    <div style={{
+                      padding: '0 20px 20px 20px',
+                      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+                      background: '#f9fafb'
+                    }}>
+                      <p style={{
+                        color: '#6b7280',
+                        lineHeight: '1.6',
+                        margin: '16px 0 0 0'
+                      }}>
+                        Most resume analyses complete within 30-60 seconds. The process includes file upload, text extraction, AI analysis, and score calculation. Larger files may take slightly longer.
+                      </p>
+                    </div>
+                  )}
                 </div>
 
-                <div className="border-l-4 border-purple-500 pl-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">
+                {/* FAQ Item 3 */}
+                <div style={{
+                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  background: 'white'
+                }}>
+                  <button
+                    onClick={() => toggleItem('account')}
+                    style={{
+                      width: '100%',
+                      padding: '20px',
+                      textAlign: 'left',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#1f2937'
+                    }}
+                  >
                     Do I need to create an account?
-                  </h3>
-                  <p className="text-gray-700">
-                    No account required! ProfileCrafted works instantly - just upload your resume and get 
-                    immediate analysis. Your results are displayed in your browser session only.
-                  </p>
+                    <span style={{
+                      transform: openItems['account'] ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s ease'
+                    }}>▼</span>
+                  </button>
+                  {openItems['account'] && (
+                    <div style={{
+                      padding: '0 20px 20px 20px',
+                      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+                      background: '#f9fafb'
+                    }}>
+                      <p style={{
+                        color: '#6b7280',
+                        lineHeight: '1.6',
+                        margin: '16px 0 0 0'
+                      }}>
+                        No account required! ProfileCrafted works instantly - just upload your resume and get immediate analysis. Your results are displayed in your browser session only.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
-            </section>
+            </div>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Analysis & Scoring</h2>
+            <div style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '24px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Analysis & Scoring</h2>
               
               <div className="space-y-6">
                 <div className="border-l-4 border-orange-500 pl-6">
@@ -144,21 +327,63 @@ export default function FAQ() {
                   </p>
                 </div>
               </div>
-            </section>
+            </div>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Privacy & Security</h2>
+            <div style={{ marginBottom: '48px' }}>
+              <h2 style={{
+                fontSize: '24px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                textAlign: 'center'
+              }}>Privacy & Security</h2>
               
-              <div className="space-y-6">
-                <div className="border-l-4 border-green-600 pl-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* FAQ Item - Security */}
+                <div style={{
+                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  background: 'white'
+                }}>
+                  <button
+                    onClick={() => toggleItem('security')}
+                    style={{
+                      width: '100%',
+                      padding: '20px',
+                      textAlign: 'left',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      color: '#1f2937'
+                    }}
+                  >
                     Is my resume data secure?
-                  </h3>
-                  <p className="text-gray-700">
-                    Absolutely! Your resume files are processed securely and stored on Cloudflare R2 with enterprise-grade encryption for up to 30 days to enable re-analysis, then automatically deleted. 
-                    We use HTTPS encryption, don't store personal data permanently, and follow strict privacy practices. 
-                    See our <Link href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</Link> for details.
-                  </p>
+                    <span style={{
+                      transform: openItems['security'] ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s ease'
+                    }}>▼</span>
+                  </button>
+                  {openItems['security'] && (
+                    <div style={{
+                      padding: '0 20px 20px 20px',
+                      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+                      background: '#f9fafb'
+                    }}>
+                      <p style={{
+                        color: '#6b7280',
+                        lineHeight: '1.6',
+                        margin: '16px 0 0 0'
+                      }}>
+                        Absolutely! Your resume files are processed securely and stored on Cloudflare R2 with enterprise-grade encryption for up to 30 days to enable re-analysis, then automatically deleted. We use HTTPS encryption, don't store personal data permanently, and follow strict privacy practices.
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 <div className="border-l-4 border-yellow-500 pl-6">

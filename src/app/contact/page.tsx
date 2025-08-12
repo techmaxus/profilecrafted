@@ -153,60 +153,24 @@ export default function Contact() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
-              <div className="space-y-6">
-                <div className="border-l-4 border-blue-500 pl-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    What file formats are supported?
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    ProfileCrafted supports PDF and DOCX (Microsoft Word) files up to 10MB in size. 
-                    We recommend using PDF format for best text extraction results.
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-green-500 pl-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    Is my resume data secure?
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    Yes! Your resume files are processed securely and stored on Cloudflare R2 with enterprise-grade encryption for up to 30 days to enable re-analysis, then automatically deleted. 
-                    We don't store your resume content permanently. See our{' '}
-                    <Link href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</Link>{' '}
-                    for full details.
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-purple-500 pl-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    How accurate is the AI analysis?
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    Our AI is trained specifically for APM role evaluation and provides valuable insights. 
-                    However, it should supplement, not replace, professional career advice. Results may vary 
-                    based on resume format and content clarity.
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-orange-500 pl-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    Can I use this for roles other than APM?
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    ProfileCrafted is specifically optimized for Associate Product Manager roles. While some 
-                    insights may be relevant to other positions, the scoring and feedback are tailored for APM competencies.
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-red-500 pl-4">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    What if my resume upload fails?
-                  </h3>
-                  <p className="text-gray-700 text-sm">
-                    Try these troubleshooting steps: 1) Ensure your file is PDF or DOCX format, 2) Check file size is under 10MB, 
-                    3) Verify the file isn't password-protected, 4) Try refreshing the page. If issues persist, contact support.
-                  </p>
-                </div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Additional Information</h2>
+              <div style={{
+                background: '#f3f4f6',
+                padding: '24px',
+                borderRadius: '12px',
+                textAlign: 'center'
+              }}>
+                <p style={{
+                  color: '#4b5563',
+                  fontSize: '16px',
+                  lineHeight: '1.6',
+                  marginBottom: '16px'
+                }}>For frequently asked questions, please visit our <a href="/faq" style={{ color: '#059669', textDecoration: 'underline' }}>FAQ page</a>.</p>
+                <p style={{
+                  color: '#6b7280',
+                  fontSize: '14px',
+                  lineHeight: '1.5'
+                }}>We're here to help you make the most of ProfileCrafted. Don't hesitate to reach out!</p>
               </div>
             </section>
 

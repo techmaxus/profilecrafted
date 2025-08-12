@@ -52,18 +52,21 @@ export default function About() {
         <div style={{
           background: 'rgba(255, 255, 255, 0.95)',
           borderRadius: '20px',
-          padding: '48px',
+          padding: '32px 24px',
           boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(10px)'
+          backdropFilter: 'blur(10px)',
+          minHeight: 'auto',
+          overflow: 'visible'
         }}>
           <h1 style={{
-            fontSize: '48px',
+            fontSize: '36px',
             fontWeight: '700',
             background: 'linear-gradient(135deg, #6b7280 0%, #10b981 50%, #059669 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            marginBottom: '32px',
-            textAlign: 'center'
+            marginBottom: '24px',
+            textAlign: 'center',
+            lineHeight: '1.2'
           }}>About ProfileCrafted</h1>
           
           <div style={{ maxWidth: 'none' }}>
@@ -78,9 +81,10 @@ export default function About() {
               }}>What is ProfileCrafted?</h2>
               <p style={{
                 color: '#4b5563',
-                fontSize: '18px',
-                lineHeight: '1.7',
-                marginBottom: '16px'
+                fontSize: '16px',
+                lineHeight: '1.8',
+                marginBottom: '24px',
+                textAlign: 'left'
               }}>
                 ProfileCrafted is an AI-powered resume analysis tool specifically designed for 
                 Associate Product Manager (APM) roles at top tech companies. Our platform helps 
