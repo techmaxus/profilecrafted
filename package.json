@@ -14,6 +14,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/pdf-parse": "^1.1.5",
     "dotenv": "^17.2.1",
+    "mammoth": "^1.10.0",
     "next": "15.4.6",
     "nodemailer": "^7.0.5",
     "openai": "^4.24.1",

@@ -46,9 +46,20 @@ export default function ProfileCraftedApp() {
             fileName: parseResult.metadata?.fileName
           });
         } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-          // For DOCX files, we'll need to implement DOCX parsing later
-          // For now, show an informative error
-          throw new Error('DOCX parsing not yet implemented. Please use PDF files for now.');
+          // Use backend DOCX parsing service for production reliability
+          const docxParsingService = await import('../services/docxParsingService');
+          const parseResult = await docxParsingService.default.parseDocx(file);
+          
+          if (!parseResult.success) {
+            throw new Error(parseResult.error || 'Failed to parse DOCX');
+          }
+          
+          resumeText = parseResult.text || '';
+          console.log('📄 DOCX text extracted via backend:', {
+            length: resumeText.length,
+            method: parseResult.metadata?.parsingMethod,
+            fileName: parseResult.metadata?.fileName
+          });
         } else {
           // Fallback for other text-based files
           const fileReader = new FileReader();
