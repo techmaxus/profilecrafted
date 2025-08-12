@@ -31,30 +31,20 @@ export default function ProfileCraftedApp() {
         let resumeText: string;
         
         if (file.type === 'application/pdf') {
-          // Extract text from PDF using pdfjs-dist (browser-compatible)
-          const arrayBuffer = await file.arrayBuffer();
-          const pdfjsLib = await import('pdfjs-dist');
+          // Use backend PDF parsing service for production reliability
+          const pdfParsingService = await import('../services/pdfParsingService');
+          const parseResult = await pdfParsingService.default.parsePDF(file);
           
-          // Configure PDF.js worker - use a reliable CDN source
-          if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          if (!parseResult.success) {
+            throw new Error(parseResult.error || 'Failed to parse PDF');
           }
           
-          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-          let fullText = '';
-          
-          // Extract text from all pages
-          for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-            const page = await pdf.getPage(pageNum);
-            const textContent = await page.getTextContent();
-            const pageText = textContent.items
-              .map((item) => ('str' in item ? item.str : ''))
-              .join(' ');
-            fullText += pageText + '\n';
-          }
-          
-          resumeText = fullText.trim();
-          console.log('📄 PDF text extracted, length:', resumeText?.length);
+          resumeText = parseResult.text || '';
+          console.log('📄 PDF text extracted via backend:', {
+            length: resumeText.length,
+            pages: parseResult.metadata?.pages,
+            fileName: parseResult.metadata?.fileName
+          });
         } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
           // For DOCX files, we'll need to implement DOCX parsing later
           // For now, show an informative error
