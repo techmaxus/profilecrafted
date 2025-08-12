@@ -2,33 +2,125 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200 mt-16">
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="grid md:grid-cols-4 gap-8">
+    <footer style={{
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      marginTop: '64px',
+      color: 'white'
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '48px 32px'
+      }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '40px',
+          marginBottom: '32px'
+        }}>
           {/* Brand */}
-          <div className="col-span-1">
-            <h3 className="font-bold text-gray-900 mb-3">ProfileCrafted</h3>
-            <p className="text-gray-600 text-sm">
+          <div>
+            <h3 style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              marginBottom: '16px',
+              color: 'white'
+            }}>
+              ProfileCrafted
+            </h3>
+            <p style={{
+              color: 'rgba(255, 255, 255, 0.9)',
+              fontSize: '16px',
+              lineHeight: '1.6',
+              marginBottom: '20px'
+            }}>
               AI-powered resume analysis for Associate Product Manager roles at top tech companies.
             </p>
+            <div style={{
+              display: 'flex',
+              gap: '12px',
+              alignItems: 'center'
+            }}>
+              <span style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                padding: '6px 12px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: '600'
+              }}>
+                ✨ AI-Powered
+              </span>
+              <span style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                padding: '6px 12px',
+                borderRadius: '20px',
+                fontSize: '12px',
+                fontWeight: '600'
+              }}>
+                🎯 APM-Focused
+              </span>
+            </div>
           </div>
 
           {/* Product */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Product</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <h4 style={{
+              fontSize: '18px',
+              fontWeight: '600',
+              marginBottom: '20px',
+              color: 'white'
+            }}>
+              Product
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '12px' }}>
+                <Link 
+                  href="/about" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   How It Works
                 </Link>
               </li>
-              <li>
-                <Link href="/faq" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <li style={{ marginBottom: '12px' }}>
+                <Link 
+                  href="/faq" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   FAQ
                 </Link>
               </li>
-              <li>
-                <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <li style={{ marginBottom: '12px' }}>
+                <Link 
+                  href="/contact" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   Support
                 </Link>
               </li>
@@ -37,20 +129,63 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Legal</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/privacy" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <h4 style={{
+              fontSize: '18px',
+              fontWeight: '600',
+              marginBottom: '20px',
+              color: 'white'
+            }}>
+              Legal
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '12px' }}>
+                <Link 
+                  href="/privacy" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   Privacy Policy
                 </Link>
               </li>
-              <li>
-                <Link href="/terms" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <li style={{ marginBottom: '12px' }}>
+                <Link 
+                  href="/terms" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   Terms of Service
                 </Link>
               </li>
-              <li>
-                <a href="mailto:legal@profilecrafted.com" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <li style={{ marginBottom: '12px' }}>
+                <a 
+                  href="mailto:legal@profilecrafted.com" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   Legal Inquiries
                 </a>
               </li>
@@ -59,20 +194,63 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Contact</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="mailto:support@profilecrafted.com" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <h4 style={{
+              fontSize: '18px',
+              fontWeight: '600',
+              marginBottom: '20px',
+              color: 'white'
+            }}>
+              Contact
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '12px' }}>
+                <a 
+                  href="mailto:support@profilecrafted.com" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   General Support
                 </a>
               </li>
-              <li>
-                <a href="mailto:privacy@profilecrafted.com" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <li style={{ marginBottom: '12px' }}>
+                <a 
+                  href="mailto:privacy@profilecrafted.com" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   Privacy Questions
                 </a>
               </li>
-              <li>
-                <a href="mailto:feedback@profilecrafted.com" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <li style={{ marginBottom: '12px' }}>
+                <a 
+                  href="mailto:feedback@profilecrafted.com" 
+                  style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    textDecoration: 'none',
+                    fontSize: '15px',
+                    transition: 'color 0.2s ease',
+                    display: 'block',
+                    padding: '4px 0'
+                  }}
+                  onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                  onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.8)'}
+                >
                   Feature Requests
                 </a>
               </li>
@@ -81,19 +259,102 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} ProfileCrafted. Built with ❤️ for the PM community.
-          </p>
-          <div className="flex items-center space-x-4 mt-4 md:mt-0">
-            <span className="text-gray-400 text-xs">Powered by</span>
-            <div className="flex items-center space-x-2 text-xs text-gray-500">
-              <span>OpenAI</span>
-              <span>•</span>
-              <span>Vercel</span>
-              <span>•</span>
-              <span>Cloudflare</span>
+        <div style={{
+          borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+          paddingTop: '32px',
+          marginTop: '32px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '16px'
+        }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '12px',
+            textAlign: 'center'
+          }}>
+            <p style={{
+              color: 'rgba(255, 255, 255, 0.9)',
+              fontSize: '16px',
+              fontWeight: '500',
+              margin: 0
+            }}>
+              &copy; 2025 ProfileCrafted • Built with &hearts; for the PM community
+            </p>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '16px',
+              flexWrap: 'wrap',
+              justifyContent: 'center'
+            }}>
+              <span style={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontSize: '14px'
+              }}>
+                Powered by
+              </span>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <span style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  padding: '4px 8px',
+                  borderRadius: '12px',
+                  color: 'white',
+                  fontSize: '12px',
+                  fontWeight: '600'
+                }}>
+                  OpenAI
+                </span>
+                <span style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  padding: '4px 8px',
+                  borderRadius: '12px',
+                  color: 'white',
+                  fontSize: '12px',
+                  fontWeight: '600'
+                }}>
+                  Vercel
+                </span>
+                <span style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  padding: '4px 8px',
+                  borderRadius: '12px',
+                  color: 'white',
+                  fontSize: '12px',
+                  fontWeight: '600'
+                }}>
+                  Cloudflare
+                </span>
+              </div>
             </div>
+            <p style={{
+              color: 'rgba(255, 255, 255, 0.7)',
+              fontSize: '14px',
+              margin: 0
+            }}>
+              Vibe coded by{' '}
+              <a 
+                href="https://www.linkedin.com/in/techmaxus/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseOver={(e) => (e.target as HTMLElement).style.color = 'white'}
+                onMouseOut={(e) => (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.9)'}
+              >
+                Lakshay Kapoor
+              </a>
+            </p>
           </div>
         </div>
       </div>
