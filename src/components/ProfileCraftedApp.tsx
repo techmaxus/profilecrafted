@@ -219,12 +219,13 @@ export default function ProfileCraftedApp() {
     }
   };
 
-  const steps = [
-    { id: 'upload', label: 'Upload Resume', icon: '📤' },
-    { id: 'analysis', label: 'APM Fit Score', icon: '📊' },
-    { id: 'essay', label: 'AI Essay', icon: '✍️' },
-    { id: 'export', label: 'Export & Share', icon: '🚀' },
-  ];
+  // const steps = [
+  //   { id: 'upload', label: 'Upload Resume', icon: '📄' },
+  //   { id: 'analyze', label: 'AI Analysis', icon: '🤖' },
+  //   { id: 'results', label: 'View Results', icon: '📊' },
+  //   { id: 'essay', label: 'AI Essay', icon: '✍️' },
+  //   { id: 'export', label: 'Export & Share', icon: '🚀' },
+  // ];
 
   // const currentStepIndex = steps.findIndex(step => step.id === appState.currentStep);
 
