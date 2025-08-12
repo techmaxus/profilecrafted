@@ -278,9 +278,9 @@ export default function ProfileCraftedApp() {
 
   const renderProgressBar = () => {
     const currentIndex = getCurrentStepIndex();
-    // Only show progress bar during upload and analysis phases
-    // Don't show when navigating between completed steps (essay, export)
-    if (currentIndex === -1 || appState.currentStep === 'essay' || appState.currentStep === 'export') {
+    // Only show progress bar during upload phase and while analysis is in progress
+    // Hide progress bar when analysis is complete (showing ScoreCard) and on essay/export pages
+    if (currentIndex === -1 || (appState.currentStep === 'analysis' && appState.scores) || appState.currentStep === 'essay' || appState.currentStep === 'export') {
       return null;
     }
 
@@ -491,7 +491,7 @@ export default function ProfileCraftedApp() {
       <main style={{ 
         maxWidth: '1280px', 
         margin: '0 auto', 
-        padding: '180px 32px 48px 32px' 
+        padding: '220px 32px 48px 32px' 
       }}>
         {renderProgressBar()}
         {renderCurrentStep()}
