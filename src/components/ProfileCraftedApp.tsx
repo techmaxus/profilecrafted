@@ -183,13 +183,44 @@ export default function ProfileCraftedApp() {
           />
         );
       case 'analysis':
-        return appState.scores ? (
-          <ScoreCard
-            scores={appState.scores}
-            onGenerateEssay={handleGenerateEssay}
-            isGenerating={appState.isLoading}
-          />
-        ) : null;
+        // Only show ScoreCard after all 6 steps are complete
+        if (appState.scores && getCurrentStepIndex() === 5) {
+          return (
+            <ScoreCard
+              scores={appState.scores}
+              onGenerateEssay={handleGenerateEssay}
+              isGenerating={appState.isLoading}
+            />
+          );
+        }
+        // Show loading/processing message while analysis is in progress
+        return (
+          <div style={{
+            textAlign: 'center',
+            padding: '48px 24px',
+            background: 'rgba(255, 255, 255, 0.95)',
+            borderRadius: '16px',
+            margin: '24px auto',
+            maxWidth: '600px'
+          }}>
+            <div style={{
+              fontSize: '24px',
+              fontWeight: '600',
+              color: '#1f2937',
+              marginBottom: '16px'
+            }}>
+              🔍 Analyzing Your Resume
+            </div>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '18px',
+              lineHeight: '1.6'
+            }}>
+              Our AI is processing your resume through our comprehensive APM evaluation framework. 
+              Please wait while we complete all analysis steps...
+            </p>
+          </div>
+        );
       case 'essay':
         return (
           <EssayEditor
@@ -232,7 +263,13 @@ export default function ProfileCraftedApp() {
   const getCurrentStepIndex = () => {
     switch (appState.currentStep) {
       case 'upload': return appState.isLoading ? 0 : -1;
-      case 'analysis': return appState.isLoading ? Math.min(3, Math.floor(Date.now() / 1000) % 4) : 3;
+      case 'analysis': 
+        if (appState.isLoading) {
+          // Simulate progression through analysis steps
+          return Math.min(3, Math.floor(Date.now() / 1000) % 4);
+        }
+        // Only show score after ALL 6 steps are complete
+        return appState.scores ? 5 : 3;
       case 'essay': return 4;
       case 'export': return 5;
       default: return -1;
@@ -335,8 +372,14 @@ export default function ProfileCraftedApp() {
         padding: '24px 32px',
         textAlign: 'center'
       }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center'
+          }}>
+            {/* Logo and Tagline */}
+            <div style={{ marginBottom: '20px' }}>
               <h1 style={{
                 fontSize: '36px',
                 fontWeight: '600',
@@ -356,7 +399,7 @@ export default function ProfileCraftedApp() {
               </p>
             </div>
             
-            {/* Navigation Links - Responsive */}
+            {/* Navigation Links - Mobile Responsive */}
             <nav style={{ 
               display: 'flex', 
               gap: '20px', 

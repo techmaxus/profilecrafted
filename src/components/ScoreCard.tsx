@@ -106,31 +106,35 @@ export default function ScoreCard({ scores, onGenerateEssay, isGenerating }: Sco
             viewBox="0 0 100 100" 
             style={{ transform: 'rotate(-90deg)' }}
           >
-            {/* Background circle */}
+            {/* Background circle - Improved contrast with sage green theme */}
             <circle
               cx="50"
               cy="50"
               r="40"
-              stroke="#e5e7eb"
+              stroke="#9ca3af"
               strokeWidth="8"
               fill="none"
+              opacity="0.3"
             />
-            {/* Progress circle */}
+            {/* Progress circle - Sage green theme colors */}
             <circle
               cx="50"
               cy="50"
               r="40"
               stroke={
-                (animatedScores.overall || 0) >= 80 ? '#10b981' : 
-                (animatedScores.overall || 0) >= 60 ? '#2563eb' : 
-                (animatedScores.overall || 0) >= 40 ? '#f59e0b' : '#ef4444'
+                (animatedScores.overall || 0) >= 80 ? '#059669' : 
+                (animatedScores.overall || 0) >= 60 ? '#10b981' : 
+                (animatedScores.overall || 0) >= 40 ? '#6b7280' : '#ef4444'
               }
               strokeWidth="8"
               fill="none"
               strokeLinecap="round"
               strokeDasharray={`${2 * Math.PI * 40}`}
               strokeDashoffset={`${2 * Math.PI * 40 * (1 - (animatedScores.overall || 0) / 100)}`}
-              style={{ transition: 'all 1s ease-out' }}
+              style={{ 
+                transition: 'all 1s ease-out',
+                filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+              }}
             />
           </svg>
         </div>
