@@ -4,7 +4,7 @@ export default function FAQ() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #9ca3af 0%, #6b7280 25%, #10b981 75%, #059669 100%)',
       padding: '0'
     }}>
       {/* Header */}
@@ -57,7 +57,7 @@ export default function FAQ() {
           <h1 style={{
             fontSize: '48px',
             fontWeight: '700',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: 'linear-gradient(135deg, #6b7280 0%, #10b981 50%, #059669 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             marginBottom: '32px',

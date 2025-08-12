@@ -165,6 +165,7 @@ export default function EssayEditor({
           onClick={onRegenerate}
           disabled={isLoading}
           className="btn-primary"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
         >
           {isLoading ? (
             <div className="flex items-center justify-center space-x-2">
@@ -172,7 +173,12 @@ export default function EssayEditor({
               <span className="hidden sm:inline">Regenerating...</span>
             </div>
           ) : (
-            'Regenerate'
+            <>
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>Regenerate</span>
+            </>
           )}
         </button>
 
@@ -180,8 +186,23 @@ export default function EssayEditor({
         <button
           onClick={handleCopy}
           className="btn-primary"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
         >
-          {copied ? 'Copied!' : 'Copy'}
+          {copied ? (
+            <>
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Copied!</span>
+            </>
+          ) : (
+            <>
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>Copy</span>
+            </>
+          )}
         </button>
 
         {/* Secondary Email Button - Ghost Style */}
@@ -191,8 +212,12 @@ export default function EssayEditor({
             if (email) onSendEmail(email);
           }}
           className="btn-primary"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
         >
-          Send Email
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span>Send Email</span>
         </button>
 
         {/* Secondary Download Button - Ghost Style */}
@@ -207,8 +232,12 @@ export default function EssayEditor({
             document.body.removeChild(element);
           }}
           className="btn-primary"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
         >
-          Download
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>Download</span>
         </button>
       </div>
     </div>
