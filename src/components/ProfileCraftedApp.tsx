@@ -316,7 +316,11 @@ export default function ProfileCraftedApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 25%, #d1fae5 75%, #a7f3d0 100%)',
+      color: '#111827'
+    }}>
       {/* Header - Soft Gray and Sage Green Gradient Banner */}
       <header style={{
         position: 'fixed',

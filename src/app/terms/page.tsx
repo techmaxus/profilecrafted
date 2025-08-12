@@ -4,7 +4,7 @@ export default function TermsOfService() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #9ca3af 0%, #6b7280 25%, #10b981 75%, #059669 100%)',
       padding: '0'
     }}>
       {/* Header */}
@@ -17,7 +17,7 @@ export default function TermsOfService() {
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 32px',
+          padding: '48px 32px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between'
@@ -58,7 +58,7 @@ export default function TermsOfService() {
           <h1 style={{
             fontSize: '48px',
             fontWeight: '700',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            background: 'linear-gradient(135deg, #6b7280 0%, #10b981 50%, #059669 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             marginBottom: '32px',
@@ -70,9 +70,21 @@ export default function TermsOfService() {
               <strong>Last updated:</strong> {new Date().toLocaleDateString()}
             </p>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
-              <p className="text-gray-700 mb-4">
+            <section style={{ marginBottom: '32px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '16px',
+                borderBottom: '2px solid #10b981',
+                paddingBottom: '8px'
+              }}>1. Acceptance of Terms</h2>
+              <p style={{
+                color: '#4b5563',
+                fontSize: '18px',
+                lineHeight: '1.7',
+                marginBottom: '16px'
+              }}>
                 By accessing and using ProfileCrafted, you accept and agree to be bound by the terms and 
                 provision of this agreement. If you do not agree to abide by the above, please do not use this service.
               </p>
