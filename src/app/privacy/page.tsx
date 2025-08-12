@@ -2,26 +2,108 @@ import Link from 'next/link';
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      padding: '0'
+    }}>
+      {/* Header */}
+      <header style={{
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+        padding: '20px 0'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 32px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <Link 
+            href="/" 
+            style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'white',
+              textDecoration: 'none'
+            }}
+          >
+            ProfileCrafted
+          </Link>
+          <nav style={{ display: 'flex', gap: '24px' }}>
+            <Link href="/" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>Home</Link>
+            <Link href="/about" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>About</Link>
+            <Link href="/faq" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>FAQ</Link>
+            <Link href="/contact" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>Support</Link>
+          </nav>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '48px 32px'
+      }}>
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.95)',
+          borderRadius: '20px',
+          padding: '48px',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <h1 style={{
+            fontSize: '48px',
+            fontWeight: '700',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            marginBottom: '32px',
+            textAlign: 'center'
+          }}>Privacy Policy</h1>
           
-          <div className="prose prose-gray max-w-none">
-            <p className="text-sm text-gray-600 mb-6">
+          <div style={{ maxWidth: 'none' }}>
+            <p style={{
+              fontSize: '14px',
+              color: '#6b7280',
+              marginBottom: '24px',
+              textAlign: 'center',
+              fontStyle: 'italic'
+            }}>
               <strong>Last updated:</strong> {new Date().toLocaleDateString()}
             </p>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">1. Information We Collect</h2>
-              <p className="text-gray-700 mb-4">
+            <section style={{ marginBottom: '32px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '16px',
+                borderBottom: '2px solid #667eea',
+                paddingBottom: '8px'
+              }}>1. Information We Collect</h2>
+              <p style={{
+                color: '#4b5563',
+                fontSize: '18px',
+                lineHeight: '1.7',
+                marginBottom: '16px'
+              }}>
                 ProfileCrafted collects and processes the following information:
               </p>
-              <ul className="list-disc pl-6 text-gray-700 space-y-2">
-                <li><strong>Resume Files:</strong> PDF and DOCX files you upload for analysis</li>
-                <li><strong>Extracted Text:</strong> Text content extracted from your resume files</li>
-                <li><strong>Usage Data:</strong> Basic analytics about how you use our service</li>
-                <li><strong>Technical Data:</strong> IP address, browser type, and device information</li>
+              <ul style={{
+                listStyleType: 'disc',
+                paddingLeft: '24px',
+                color: '#4b5563',
+                fontSize: '16px',
+                lineHeight: '1.6'
+              }}>
+                <li style={{ marginBottom: '8px' }}><strong>Resume Files:</strong> PDF and DOCX files you upload for analysis</li>
+                <li style={{ marginBottom: '8px' }}><strong>Extracted Text:</strong> Text content extracted from your resume files</li>
+                <li style={{ marginBottom: '8px' }}><strong>Usage Data:</strong> Basic analytics about how you use our service</li>
+                <li style={{ marginBottom: '8px' }}><strong>Technical Data:</strong> IP address, browser type, and device information</li>
               </ul>
             </section>
 

@@ -2,15 +2,86 @@ import Link from 'next/link';
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">About ProfileCrafted</h1>
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      padding: '0'
+    }}>
+      {/* Header */}
+      <header style={{
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+        padding: '20px 0'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 32px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <Link 
+            href="/" 
+            style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'white',
+              textDecoration: 'none'
+            }}
+          >
+            ProfileCrafted
+          </Link>
+          <nav style={{ display: 'flex', gap: '24px' }}>
+            <Link href="/" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>Home</Link>
+            <Link href="/faq" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>FAQ</Link>
+            <Link href="/contact" style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none', fontSize: '16px' }}>Support</Link>
+          </nav>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '48px 32px'
+      }}>
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.95)',
+          borderRadius: '20px',
+          padding: '48px',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <h1 style={{
+            fontSize: '48px',
+            fontWeight: '700',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            marginBottom: '32px',
+            textAlign: 'center'
+          }}>
+            About ProfileCrafted
+          </h1>
           
-          <div className="prose prose-gray max-w-none">
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">What is ProfileCrafted?</h2>
-              <p className="text-gray-700 mb-4">
+          <div style={{ maxWidth: 'none' }}>
+            <section style={{ marginBottom: '32px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '16px',
+                borderBottom: '2px solid #667eea',
+                paddingBottom: '8px'
+              }}>What is ProfileCrafted?</h2>
+              <p style={{
+                color: '#4b5563',
+                fontSize: '18px',
+                lineHeight: '1.7',
+                marginBottom: '16px'
+              }}>
                 ProfileCrafted is an AI-powered resume analysis tool specifically designed for 
                 Associate Product Manager (APM) roles at top tech companies. Our platform helps 
                 aspiring product managers understand how their resumes align with industry expectations 
@@ -18,30 +89,66 @@ export default function About() {
               </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">How It Works</h2>
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div className="bg-blue-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-blue-900 mb-2">📄 Upload Your Resume</h3>
-                  <p className="text-blue-800 text-sm">
+            <section style={{ marginBottom: '32px' }}>
+              <h2 style={{
+                fontSize: '28px',
+                fontWeight: '600',
+                color: '#1f2937',
+                marginBottom: '24px',
+                borderBottom: '2px solid #667eea',
+                paddingBottom: '8px'
+              }}>How It Works</h2>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '24px',
+                marginBottom: '24px'
+              }}>
+                <div style={{
+                  background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '1px solid #93c5fd',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+                }}>
+                  <h3 style={{ fontWeight: '600', color: '#1e40af', marginBottom: '8px', fontSize: '18px' }}>📄 Upload Your Resume</h3>
+                  <p style={{ color: '#1e40af', fontSize: '15px', lineHeight: '1.5' }}>
                     Support for PDF and DOCX files with secure processing and automatic text extraction.
                   </p>
                 </div>
-                <div className="bg-green-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-green-900 mb-2">🤖 AI Analysis</h3>
-                  <p className="text-green-800 text-sm">
+                <div style={{
+                  background: 'linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '1px solid #86efac',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+                }}>
+                  <h3 style={{ fontWeight: '600', color: '#166534', marginBottom: '8px', fontSize: '18px' }}>🤖 AI Analysis</h3>
+                  <p style={{ color: '#166534', fontSize: '15px', lineHeight: '1.5' }}>
                     Advanced AI evaluates your resume across 5 key APM competencies with detailed scoring.
                   </p>
                 </div>
-                <div className="bg-purple-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-purple-900 mb-2">📊 Detailed Feedback</h3>
-                  <p className="text-purple-800 text-sm">
+                <div style={{
+                  background: 'linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '1px solid #c4b5fd',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+                }}>
+                  <h3 style={{ fontWeight: '600', color: '#7c3aed', marginBottom: '8px', fontSize: '18px' }}>📊 Detailed Feedback</h3>
+                  <p style={{ color: '#7c3aed', fontSize: '15px', lineHeight: '1.5' }}>
                     Receive comprehensive scores, strengths analysis, and specific improvement recommendations.
                   </p>
                 </div>
-                <div className="bg-orange-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-orange-900 mb-2">🚀 Export & Share</h3>
-                  <p className="text-orange-800 text-sm">
+                <div style={{
+                  background: 'linear-gradient(135deg, #fed7aa 0%, #fdba74 100%)',
+                  padding: '24px',
+                  borderRadius: '16px',
+                  border: '1px solid #fb923c',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+                }}>
+                  <h3 style={{ fontWeight: '600', color: '#c2410c', marginBottom: '8px', fontSize: '18px' }}>🚀 Export & Share</h3>
+                  <p style={{ color: '#c2410c', fontSize: '15px', lineHeight: '1.5' }}>
                     Download your analysis results and track your progress over time.
                   </p>
                 </div>
