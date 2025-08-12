@@ -1,7 +1,7 @@
 'use client';
 
 import { ScoreWithTips } from '@/types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 
 interface ScoreCardProps {
   scores: ScoreWithTips;
@@ -11,17 +11,28 @@ interface ScoreCardProps {
 
 export default function ScoreCard({ scores, onGenerateEssay, isGenerating }: ScoreCardProps) {
   const [animatedScores, setAnimatedScores] = useState<Record<string, number>>({});
+  const lastScoresRef = useRef<ScoreWithTips | null>(null);
   
-  const categories = [
+  // Stabilize categories array to prevent re-renders
+  const categories = useMemo(() => [
     { key: 'technicalFluency', label: 'Technical Fluency', color: 'from-primary-blue to-accent-blue' },
     { key: 'productThinking', label: 'Product Thinking', color: 'from-accent-green to-emerald-500' },
     { key: 'curiosityCreativity', label: 'Curiosity & Creativity', color: 'from-primary-purple to-accent-purple' },
     { key: 'communicationClarity', label: 'Communication Clarity', color: 'from-accent-orange to-yellow-500' },
     { key: 'leadershipTeamwork', label: 'Leadership & Teamwork', color: 'from-pink-500 to-rose-500' },
-  ];
+  ], []);
 
-  // Animate scores from 0 to final value
+  // Animate scores from 0 to final value (only when scores change)
   useEffect(() => {
+    // Check if scores have actually changed
+    if (lastScoresRef.current && 
+        JSON.stringify(lastScoresRef.current) === JSON.stringify(scores)) {
+      return; // Scores haven't changed, don't re-animate
+    }
+    
+    // Update the ref with new scores
+    lastScoresRef.current = scores;
+    
     const animateScore = (key: string, finalScore: number) => {
       let currentScore = 0;
       const increment = finalScore / 60; // 60 frames for smooth animation
@@ -35,6 +46,9 @@ export default function ScoreCard({ scores, onGenerateEssay, isGenerating }: Sco
         setAnimatedScores(prev => ({ ...prev, [key]: Math.round(currentScore) }));
       }, 25); // 25ms intervals for smooth 60fps animation
     };
+
+    // Clear any existing animations to prevent overlapping
+    setAnimatedScores({});
 
     // Animate overall score
     animateScore('overall', scores.overall);
