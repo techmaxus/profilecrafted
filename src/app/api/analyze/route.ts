@@ -41,11 +41,16 @@ export async function POST(request: NextRequest) {
     const requestData = await request.json();
     resumeText = requestData.resumeText;
     fileKey = requestData.fileKey;
-    console.log('📄 Request data:', { 
-      hasResumeText: !!resumeText, 
+    console.log('📄 Request data:', {
+      hasResumeText: !!resumeText,
       resumeTextLength: resumeText?.length || 0,
-      fileKey: fileKey 
+      fileKey: fileKey || 'none'
     });
+    
+    // Debug: Show first 500 characters of resume text to check readability
+    if (resumeText) {
+      console.log('📝 Resume text preview (first 500 chars):', resumeText.substring(0, 500));
+    }
 
     if (!resumeText) {
       console.log('❌ No resume text provided');
@@ -56,10 +61,16 @@ export async function POST(request: NextRequest) {
     }
 
     // APM-focused analysis prompt
-    const analysisPrompt = `
-You are an expert APM (Associate Product Manager) recruiter analyzing a resume. Provide a comprehensive analysis with specific scores and feedback.
+    const prompt = `
+You are an expert APM recruiter analyzing resumes for Associate Product Manager positions at top tech companies.
 
-Resume Content:
+IMPORTANT: If the resume text appears garbled, corrupted, or unreadable, please do your best to extract any meaningful information and provide reasonable scores based on what you can understand. Do not return all 0 scores unless the text is completely empty.
+
+Analyze this resume and provide a comprehensive APM fit assessment:
+
+${resumeText}
+
+Evaluate the candidate across these 5 key dimensions:
 ${resumeText}
 
 Please analyze this resume for APM roles and provide:
