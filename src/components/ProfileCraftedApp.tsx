@@ -46,7 +46,7 @@ export default function ProfileCraftedApp() {
             const page = await pdf.getPage(pageNum);
             const textContent = await page.getTextContent();
             const pageText = textContent.items
-              .map((item: any) => item.str)
+              .map((item) => ('str' in item ? item.str : ''))
               .join(' ');
             fullText += pageText + '\n';
           }
