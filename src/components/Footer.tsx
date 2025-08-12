@@ -174,7 +174,7 @@ export default function Footer() {
               </li>
               <li style={{ marginBottom: '12px' }}>
                 <a 
-                  href="mailto:legal@profilecrafted.com" 
+                  href="mailto:lakshaykapoor.nsut@gmail.com?subject=Legal%20Inquiries%20-%20ProfileCrafted" 
                   style={{
                     color: 'rgba(255, 255, 255, 0.8)',
                     textDecoration: 'none',
@@ -205,7 +205,7 @@ export default function Footer() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li style={{ marginBottom: '12px' }}>
                 <a 
-                  href="mailto:support@profilecrafted.com" 
+                  href="mailto:lakshaykapoor.nsut@gmail.com?subject=General%20Support%20-%20ProfileCrafted" 
                   style={{
                     color: 'rgba(255, 255, 255, 0.8)',
                     textDecoration: 'none',
@@ -222,7 +222,7 @@ export default function Footer() {
               </li>
               <li style={{ marginBottom: '12px' }}>
                 <a 
-                  href="mailto:privacy@profilecrafted.com" 
+                  href="mailto:lakshaykapoor.nsut@gmail.com?subject=Privacy%20Questions%20-%20ProfileCrafted" 
                   style={{
                     color: 'rgba(255, 255, 255, 0.8)',
                     textDecoration: 'none',
@@ -239,7 +239,7 @@ export default function Footer() {
               </li>
               <li style={{ marginBottom: '12px' }}>
                 <a 
-                  href="mailto:feedback@profilecrafted.com" 
+                  href="mailto:lakshaykapoor.nsut@gmail.com?subject=Feature%20Requests%20-%20ProfileCrafted" 
                   style={{
                     color: 'rgba(255, 255, 255, 0.8)',
                     textDecoration: 'none',
