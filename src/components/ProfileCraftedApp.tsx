@@ -220,15 +220,100 @@ export default function ProfileCraftedApp() {
     }
   };
 
-  // const steps = [
-  //   { id: 'upload', label: 'Upload Resume', icon: '📄' },
-  //   { id: 'analyze', label: 'AI Analysis', icon: '🤖' },
-  //   { id: 'results', label: 'View Results', icon: '📊' },
-  //   { id: 'essay', label: 'AI Essay', icon: '✍️' },
-  //   { id: 'export', label: 'Export & Share', icon: '🚀' },
-  // ];
+  const steps = [
+    { id: 'upload', label: 'Analyzing Resume', icon: '📄', description: 'Processing your resume file' },
+    { id: 'analysis', label: 'Extracting Keywords', icon: '🔍', description: 'Identifying key skills and experiences' },
+    { id: 'analysis', label: 'Benchmarking with APM', icon: '📊', description: 'Comparing against APM job descriptions' },
+    { id: 'analysis', label: 'Generating APM Fit Score', icon: '🎯', description: 'Calculating your APM compatibility score' },
+    { id: 'essay', label: 'Analyzing Improvement Scope', icon: '🔧', description: 'Identifying areas for enhancement' },
+    { id: 'export', label: 'Publishing APM Fit Results', icon: '🚀', description: 'Finalizing your comprehensive analysis' },
+  ];
 
-  // const currentStepIndex = steps.findIndex(step => step.id === appState.currentStep);
+  const getCurrentStepIndex = () => {
+    switch (appState.currentStep) {
+      case 'upload': return appState.isLoading ? 0 : -1;
+      case 'analysis': return appState.isLoading ? Math.min(3, Math.floor(Date.now() / 1000) % 4) : 3;
+      case 'essay': return 4;
+      case 'export': return 5;
+      default: return -1;
+    }
+  };
+
+  const renderProgressBar = () => {
+    const currentIndex = getCurrentStepIndex();
+    if (currentIndex === -1) return null;
+
+    return (
+      <div style={{
+        background: 'rgba(255, 255, 255, 0.95)',
+        borderRadius: '16px',
+        padding: '24px',
+        margin: '0 0 32px 0',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        backdropFilter: 'blur(10px)'
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}>
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                flex: '1',
+                minWidth: '120px',
+                opacity: index <= currentIndex ? 1 : 0.4,
+                transition: 'opacity 0.3s ease'
+              }}
+            >
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                background: index <= currentIndex 
+                  ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  : '#e5e7eb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '20px',
+                color: index <= currentIndex ? 'white' : '#9ca3af',
+                marginBottom: '8px',
+                boxShadow: index === currentIndex ? '0 4px 12px rgba(102, 126, 234, 0.4)' : 'none',
+                transform: index === currentIndex ? 'scale(1.1)' : 'scale(1)',
+                transition: 'all 0.3s ease'
+              }}>
+                {step.icon}
+              </div>
+              <div style={{
+                fontSize: '12px',
+                fontWeight: '600',
+                color: index <= currentIndex ? '#1f2937' : '#9ca3af',
+                textAlign: 'center',
+                marginBottom: '4px'
+              }}>
+                {step.label}
+              </div>
+              <div style={{
+                fontSize: '10px',
+                color: index <= currentIndex ? '#6b7280' : '#d1d5db',
+                textAlign: 'center',
+                lineHeight: '1.3'
+              }}>
+                {step.description}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
@@ -269,19 +354,35 @@ export default function ProfileCraftedApp() {
               </p>
             </div>
             
-            {/* Navigation Links */}
-            <nav style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+            {/* Navigation Links - Responsive */}
+            <nav style={{ 
+              display: 'flex', 
+              gap: '20px', 
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              justifyContent: 'center'
+            }}>
               <a 
                 href="/about" 
                 style={{ 
                   color: 'rgba(255, 255, 255, 0.9)', 
                   textDecoration: 'none', 
-                  fontSize: '16px',
+                  fontSize: '15px',
                   fontWeight: '500',
-                  transition: 'color 0.2s'
+                  transition: 'color 0.2s',
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
                 }}
-                onMouseOver={(e) => e.target.style.color = 'white'}
-                onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.9)'}
+                onMouseOver={(e) => {
+                  (e.target as HTMLElement).style.color = 'white';
+                  (e.target as HTMLElement).style.background = 'rgba(255, 255, 255, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.9)';
+                  (e.target as HTMLElement).style.background = 'rgba(255, 255, 255, 0.1)';
+                }}
               >
                 About
               </a>
@@ -290,12 +391,22 @@ export default function ProfileCraftedApp() {
                 style={{ 
                   color: 'rgba(255, 255, 255, 0.9)', 
                   textDecoration: 'none', 
-                  fontSize: '16px',
+                  fontSize: '15px',
                   fontWeight: '500',
-                  transition: 'color 0.2s'
+                  transition: 'color 0.2s',
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
                 }}
-                onMouseOver={(e) => e.target.style.color = 'white'}
-                onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.9)'}
+                onMouseOver={(e) => {
+                  (e.target as HTMLElement).style.color = 'white';
+                  (e.target as HTMLElement).style.background = 'rgba(255, 255, 255, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.9)';
+                  (e.target as HTMLElement).style.background = 'rgba(255, 255, 255, 0.1)';
+                }}
               >
                 FAQ
               </a>
@@ -304,12 +415,22 @@ export default function ProfileCraftedApp() {
                 style={{ 
                   color: 'rgba(255, 255, 255, 0.9)', 
                   textDecoration: 'none', 
-                  fontSize: '16px',
+                  fontSize: '15px',
                   fontWeight: '500',
-                  transition: 'color 0.2s'
+                  transition: 'color 0.2s',
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
                 }}
-                onMouseOver={(e) => e.target.style.color = 'white'}
-                onMouseOut={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.9)'}
+                onMouseOver={(e) => {
+                  (e.target as HTMLElement).style.color = 'white';
+                  (e.target as HTMLElement).style.background = 'rgba(255, 255, 255, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  (e.target as HTMLElement).style.color = 'rgba(255, 255, 255, 0.9)';
+                  (e.target as HTMLElement).style.background = 'rgba(255, 255, 255, 0.1)';
+                }}
               >
                 Support
               </a>
@@ -324,6 +445,7 @@ export default function ProfileCraftedApp() {
         margin: '0 auto', 
         padding: '140px 32px 48px 32px' 
       }}>
+        {renderProgressBar()}
         {renderCurrentStep()}
       </main>
 
