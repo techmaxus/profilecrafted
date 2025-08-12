@@ -9,7 +9,7 @@ export interface PDFParseResponse {
   metadata?: {
     pages: number;
     length: number;
-    info: any;
+    info: Record<string, unknown>;
     fileName: string;
     fileSize: number;
   };
